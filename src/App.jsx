@@ -1,5 +1,5 @@
 import React from 'react';
-import Home from './components/Register/Register.jsx';
+import Register from './components/Register/Register.jsx';
 import Layout from './components/Layout/Layout.jsx';
 import Home from './components/Home/Home.jsx';
 import './App.css';
