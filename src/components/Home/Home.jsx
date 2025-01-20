@@ -22,7 +22,15 @@ function Templates() {
 
     return (
         <div className='text-black'>
-            <h1>home</h1>
+            <div className="container mx-auto px-8">
+                <div className='grid grid-cols-6'>
+                    {products?.map((element)=>(
+                        <div className='product'>
+                            <img src={element.images[0]} alt="" />
+                        </div>
+                    ))}
+                </div>
+            </div>
         </div>
     )
 }
