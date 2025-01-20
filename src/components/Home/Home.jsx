@@ -11,7 +11,7 @@ function Templates() {
     }, []);
 
     return (
-        <div>
+        <div className='text-black'>
             <h1>home</h1>
         </div>
     )

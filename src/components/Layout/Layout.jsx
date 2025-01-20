@@ -16,7 +16,9 @@ function Templates() {
     return (
         <div>
             <Navbar/>
-            <Outlet/>
+            <div className='min-h-dvh container mx-auto px-5 pt-24'>
+                <Outlet/>
+            </div>
             <Footer/>
         </div>
     )
