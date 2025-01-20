@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import style from './TemplateName.module.css';
 
-function Templates() {
+function TemplateName() {
     const [state, setstate] = useState();
     useEffect(() => {
         
@@ -17,4 +17,4 @@ function Templates() {
     )
 }
 
-export default Templates;
+export default TemplateName;

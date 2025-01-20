@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import style from './Register.module.css';
 
-function Templates() {
+function Register() {
     const [state, setstate] = useState();
     useEffect(() => {
         
@@ -12,9 +12,9 @@ function Templates() {
 
     return (
         <div>
-            <h1>Register</h1>
+            
         </div>
     )
 }
 
-export default Templates;
+export default Register;
