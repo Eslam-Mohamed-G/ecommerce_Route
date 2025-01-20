@@ -26,7 +26,8 @@ function Templates() {
                 <button className='block sm:hidden'><i className="fa-solid fa-bars"></i></button>
                 <div className='hidden sm:block'>
                     <ul className='flex gap-5'>
-                        <li><NavLink>Home</NavLink></li>
+                        <li><NavLink to={'/'}>Home</NavLink></li>
+                        <li><NavLink to={'/register'}>Register</NavLink></li>
                         <li><NavLink>Products</NavLink></li>
                         <li><NavLink>Brands</NavLink></li>
                         <li><NavLink>Categories</NavLink></li>
