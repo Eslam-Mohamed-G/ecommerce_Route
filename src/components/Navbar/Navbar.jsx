@@ -20,7 +20,7 @@ function Templates() {
     }, []);
 
     return (
-        <div className={`navbar w-full bg-slate-400 fixed top-0 ${isScroll ? 'py-4' : 'py-8'}`}>
+        <div className={`navbar w-full bg-slate-400 fixed top-0 transition-all ease-in-out duration-500 ${isScroll ? 'py-4' : 'py-8'}`}>
             <div className='container mx-auto px-4 flex justify-between'>
                 <h1 className='flex gap-1 items-center'><i className="fa-solid fa-cart-plus"></i>FreshCart</h1>
                 <button className='block sm:hidden'><i className="fa-solid fa-bars"></i></button>
