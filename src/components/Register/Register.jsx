@@ -1,14 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import style from './Register.module.css';
 import { useFormik } from 'formik';
+import * as Yup from 'yup'
 
 function Register() {
     const [state, setstate] = useState();
     const formik =  useFormik({
         initialValues:{
-
+            name:'',
+            email:'',
+            password:'',
+            rePassword:'',
+            phone:'',
         },
         onsubmit:(valuse=>{})
+    });
+    Yup.object().shape({
+        name: Yup.string().required('Name is required').min(3, 'min 3 letters')
     })
     useEffect(() => {
         
