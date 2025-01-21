@@ -5,7 +5,15 @@ import * as Yup from 'yup'
 
 function Register() {
     const [state, setstate] = useState();
-    const formik =  useFormik({
+    let validator = Yup.object().shape({
+        name : Yup.string().required('Name is required').min(3, 'min 3 letters'),
+        email : Yup.string().required('email is required').email('invalid email'),
+        password : Yup.string().required('password is required').matches(/[a-z0-9]{3}$/, 'invalid password'),
+        rePassword : Yup.string().required('rePassword is required').oneOf([Yup.ref('password')], 'invalid rePassword'),
+        phone : Yup.string().required('phone is required').matches(/^01[0125][0-p]{8}$/, 'invalid phone')
+    });
+
+    let formik =  useFormik({
         initialValues:{
             name:'',
             email:'',
@@ -13,13 +21,12 @@ function Register() {
             rePassword:'',
             phone:'',
         },
+        validationSchema : validator,
         onSubmit:(values)=>{
             console.log(values);
         }
     });
-    Yup.object().shape({
-        name: Yup.string().required('Name is required').min(3, 'min 3 letters')
-    })
+    
     useEffect(() => {
         
         return () => {
@@ -42,6 +49,7 @@ function Register() {
                         placeholder=" " 
                     />
                     <label htmlFor="name" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Name</label>
+                    <p className='absolute top-full text-red-500'>{formik.errors.name}</p>
                 </div>
                 <div className="relative z-0 w-full mb-5 group">
                     <input 
