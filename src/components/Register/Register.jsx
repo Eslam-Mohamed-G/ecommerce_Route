@@ -13,7 +13,9 @@ function Register() {
             rePassword:'',
             phone:'',
         },
-        onsubmit:(valuse=>{})
+        onSubmit:(values)=>{
+            console.log(values);
+        }
     });
     Yup.object().shape({
         name: Yup.string().required('Name is required').min(3, 'min 3 letters')
@@ -27,7 +29,7 @@ function Register() {
 
     return (
         <div>
-            <form className="max-w-md mx-auto">
+            <form onSubmit={formik.handleSubmit} className="max-w-md mx-auto">
                 <div className="relative z-0 w-full mb-5 group">
                     <input 
                         type="text" 
