@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup'
 
 function Register() {
-    const [state, setstate] = useState();
+    const [isValid, setIsValid] = useState();
     let validator = Yup.object().shape({
         name : Yup.string().required('Name is required').min(3, 'min 3 letters'),
         email : Yup.string().required('email is required').email('invalid email'),
@@ -34,6 +34,9 @@ function Register() {
         };
     }, []);
 
+    const trueMessage = "border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600";
+    const falseMessage = "text-red-600 border-red-300 appearance-none dark:text-white dark:border-red-600 dark:focus:border-red-500 focus:outline-none focus:ring-0 focus:border-red-600";
+
     return (
         <div>
             <form onSubmit={formik.handleSubmit} className="max-w-md mx-auto">
@@ -45,7 +48,7 @@ function Register() {
                         onBlur={formik.handleBlur} 
                         name="name" 
                         id="name" 
-                        className={`block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 ${!formik.errors.name ? 'border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600' : 'border-red-600text-red-600 appearance-none dark:text-white dark:border-red-600text-red-600 dark:focus:border-red-600text-red-600 focus:outline-none focus:ring-0 focus:border-red-600text-red-600'} peer`} 
+                        className={`block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 ${ formik.touched.name ? formik.errors.name ? falseMessage : trueMessage : trueMessage} peer`} 
                         placeholder=" " 
                     />
                     <label htmlFor="name" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Name</label>
@@ -58,6 +61,7 @@ function Register() {
                         <i className={`${formik.touched.name ? formik.errors.name ? 'hidden' : '' : 'hidden' } absolute top-1/3 end-0 text-green-500 fa-solid fa-check`}></i>
                     }
                 </div>
+                {/* email   email   email */}
                 <div className="relative z-0 w-full mb-6 group">
                     <input 
                         type="email" 
@@ -66,7 +70,7 @@ function Register() {
                         onBlur={formik.handleBlur}
                         name="email" 
                         id="email" 
-                        className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" 
+                        className={`block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 ${ formik.touched.email ? formik.errors.email ? falseMessage : trueMessage : trueMessage} peer`} 
                         placeholder=" " 
                     />
                     <label htmlFor="email" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email address</label>
@@ -80,6 +84,7 @@ function Register() {
                     }
                 </div>
 
+                {/* password   password   password */}
                 <div className="relative z-0 w-full mb-6 group">
                     <input 
                         type="password"
@@ -88,7 +93,7 @@ function Register() {
                         onBlur={formik.handleBlur}
                         name="password" 
                         id="password" 
-                        className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" 
+                        className={`block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 ${ formik.touched.password ? formik.errors.password ? falseMessage : trueMessage : trueMessage} peer`} 
                         placeholder=" " 
                     />
                     <label htmlFor="password" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
@@ -102,6 +107,7 @@ function Register() {
                     }
                 </div>
 
+                {/* rePassword   rePassword   rePassword */}
                 <div className="relative z-0 w-full mb-6 group">
                     <input 
                         type="password"
@@ -110,7 +116,7 @@ function Register() {
                         onBlur={formik.handleBlur}
                         name="rePassword" 
                         id="rePassword" 
-                        className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" 
+                        className={`block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 ${ formik.touched.rePassword ? formik.errors.rePassword ? falseMessage : trueMessage : trueMessage} peer`} 
                         placeholder=" " 
                     />
                     <label htmlFor="rePassword" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Confirm password</label>
@@ -124,6 +130,7 @@ function Register() {
                     }
                 </div>
 
+                {/* phone   phone   phone */}
                 <div className="relative z-0 w-full mb-6 group">
                     <input 
                         type="phone"
@@ -132,10 +139,10 @@ function Register() {
                         onBlur={formik.handleBlur}
                         name="phone" 
                         id="phone" 
-                        className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" 
+                        className={`block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 ${ formik.touched.rePassword ? formik.errors.rePassword ? falseMessage : trueMessage : trueMessage} peer`} 
                         placeholder=" "
                     />
-                    <label htmlFor="phone" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Phone</label>
+                    <label htmlFor="phone" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">phone</label>
                     {formik.errors.phone && formik.touched.phone ?
                         <>
                             <i className="absolute top-1/3 end-0 text-red-600 fa-solid fa-xmark"></i>
