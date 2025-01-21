@@ -43,7 +43,7 @@ function Register() {
     const falseMessage = "border-red-500 text-red-500 appearance-none text-sm focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 dark:text-red-500 dark:border-red-500";
 
     return (
-        <div className='max-w-lg p-6 m-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700'>
+        <div className='w-full max-w-lg m-auto p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700'>
             <form onSubmit={formik.handleSubmit} className="max-w-md mx-auto">
                 <div className="relative z-0 w-full mb-6 group">
                     <input 
