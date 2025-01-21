@@ -9,7 +9,7 @@ function Register() {
     let validator = Yup.object().shape({
         name : Yup.string().required('Name is required').min(3, 'min 3 letters'),
         email : Yup.string().required('email is required').email('invalid email'),
-        password : Yup.string().required('password is required').matches(/[a-z0-9]{3}$/, 'invalid password'),
+        password : Yup.string().required('password is required').matches(/[a-z0-9]{6}$/, 'invalid password'),
         rePassword : Yup.string().required('rePassword is required').oneOf([Yup.ref('password')], 'invalid rePassword'),
         phone : Yup.string().required('phone is required').matches(/^01[0125][0-p]{8}$/, 'invalid phone')
     });
