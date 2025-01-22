@@ -2,9 +2,33 @@ import React, { useEffect, useState } from 'react';
 import Google_logo from '../../assets/Google_logo.webp'
 import style from './Login.module.css';
 import { Link } from 'react-router-dom';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import axios from "axios";
 
 function Login() {
     const [state, setstate] = useState();
+    let validator = Yup.object().shape({
+        email : Yup.string().required('email is required').email('invalid email'),
+        password : Yup.string().required('password is required').matches(/[a-z0-9]{6}$/, 'invalid password')
+    });
+    let formik = useFormik({
+        initialValues:{
+            email : '',
+            password : ''
+        },
+        onSubmit: (values)=>{
+            axios.post(`https://ecommerce.routemisr.com/api/v1/auth/signin`, values)
+                .then( (response) => {
+                    if(response.data.message = 'success') {
+                        localStorage.setItem('userToken', resp?.data?.token);
+                    };
+                })
+                .catch((error) => { 
+                    setIsLoading(false); setMessageFromBackEnd(error?.response?.data?.message) 
+                });
+        }
+    })
     useEffect(() => {
 
         return () => {
