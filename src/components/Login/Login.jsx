@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import Google_logo from '../../assets/Google_logo.webp'
 import style from './Login.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from "axios";
 
 function Login() {
+    const [messageFromBackEnd, setMessageFromBackEnd] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate();
     const togglePasswordVisibility = ()=>{
         setShowPassword(!showPassword);
     };
@@ -25,10 +28,13 @@ function Login() {
         validationSchema:validator,
 
         onSubmit: (values)=>{
+            setIsLoading(true);
             axios.post(`https://ecommerce.routemisr.com/api/v1/auth/signin`, values)
                 .then( (response) => {
+                    setIsLoading(false);
                     if(response.data.message = 'success') {
-                        localStorage.setItem('userToken', resp?.data?.token);
+                        localStorage.setItem('userToken', response?.data?.token);
+                        navigate('/')
                     };
                 })
                 .catch((error) => { 
@@ -58,7 +64,7 @@ function Login() {
                     <div className="max-w-xl mx-auto">
                         <div><h1 className="text-2xl text-blue-500 font-semibold">Login to your account</h1></div>
                         <div className="divide-y divide-gray-200">
-                            <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+                            <form onSubmit={formik.handleSubmit} className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
                                 {/* email   email   email */}
                                 <div className="relative mb-8">
                                     <input 
@@ -108,7 +114,7 @@ function Login() {
                                             <p className='absolute -bottom-5 text-red-600 text-[12px]'>{formik.errors.password}</p>
                                         </>
                                         :
-                                        <i className={`${formik.touched.password ? formik.errors.password ? 'hidden' : '' : 'hidden'} absolute top-1/3 end-0 text-green-500 fa-solid fa-check`}></i>
+                                        <i className={`${formik.touched.password ? formik.errors.password ? 'hidden' : '' : 'hidden'} absolute top-1/3 end-7 text-green-500 fa-solid fa-check`}></i>
                                     }
                                     <div className='absolute top-2 end-0 cursor-pointer' onClick={togglePasswordVisibility}>
                                         {showPassword ? <i className="fa-regular fa-eye"></i> : <i className="fa-regular fa-eye-slash"></i> }
@@ -123,7 +129,14 @@ function Login() {
                                 </div>
 
                                 <div className="relative">
-                                    <button className="bg-blue-500 text-white rounded-md px-2 py-1">Submit</button>
+                                    <button className="bg-blue-500 text-white rounded-md px-2 py-1">
+                                        {isLoading ? <>Submiting... <i className='fas fa-spinner fa-spin'></i></> : 'Submit'}
+                                    </button>
+                                </div>
+
+                                <div className={`relative z-0 w-full mb-6 group text-center ${messageFromBackEnd ? '' : 'hidden'}`}>
+                                    {messageFromBackEnd ? <p className='text-red-500'>{messageFromBackEnd}</p> : <p className='text-green-500'>succeed
+                                    </p>}
                                 </div>
 
                                 {/* Login with Google */}
@@ -137,7 +150,7 @@ function Login() {
                                 <p className="mt-8 text-center">Need an account? 
                                     <Link to={'/register'} className="text-blue-500 hover:text-blue-700 font-semibold">Create an account</Link>
                                 </p>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
