@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import Google_logo from '../../assets/Google_logo.webp'
 import style from './Login.module.css';
+import { Link } from 'react-router-dom';
 
 function Login() {
     const [state, setstate] = useState();
@@ -10,47 +12,74 @@ function Login() {
         };
     }, []);
 
-    return (
-        <div className='w-full max-w-lg m-auto p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700'>
-            <form className="max-w-sm mx-auto">
-                <div className="mb-5">
-                    <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
-                        email</label>
-                    <input 
-                        type="email" 
-                        id="email"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="name@flowbite.com" 
-                        required 
-                    />
-                </div>
+    return ( 
+        <div className="py-16">
+            <div className="relative py-3 max-w-lg sm:max-w-xl sm:mx-auto">
+                {/* blue div */}
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-300 to-blue-600 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl" />
                 
-                <div className="mb-5">
-                    <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
-                        password</label>
-                    <input 
-                        type="password" 
-                        id="password"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        required
-                    />
-                </div>
-                <div className="flex items-start mb-5">
-                    <div className="flex items-center h-5">
-                        <input 
-                            id="remember" 
-                            type="checkbox" 
-                            defaultValue
-                            className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
-                            required 
-                        />
+                <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
+                    <div className="max-w-xl mx-auto">
+                        <div><h1 className="text-2xl text-blue-500 font-semibold">Login to your account</h1></div>
+                        <div className="divide-y divide-gray-200">
+                            <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+                                {/* email   email   email */}
+                                <div className="relative">
+                                    <input 
+                                        autoComplete="off" 
+                                        id="email" 
+                                        name="email" 
+                                        type="email"
+                                        className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
+                                        placeholder="Email address" 
+                                    />
+                                    <label 
+                                        htmlFor="email"
+                                        className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Email
+                                        Address
+                                    </label>
+                                </div>
+
+                                {/* password   password   password */}
+                                <div className="relative">
+                                    <input 
+                                        autoComplete="off" 
+                                        id="password" 
+                                        name="password" 
+                                        type="password" 
+                                        className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600" 
+                                        placeholder="Password" 
+                                    />
+                                    <label htmlFor="password" className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Password</label>
+                                </div>
+
+                                {/* Forgot password */}
+                                <div className="relative">
+                                    <div className="text-right mt-2">
+                                        <Link to={''} className="text-sm font-semibold text-gray-700 hover:text-blue-700 focus:text-blue-700">Forgot Password?</Link>
+                                    </div>
+                                </div>
+
+                                <div className="relative">
+                                    <button className="bg-blue-500 text-white rounded-md px-2 py-1">Submit</button>
+                                </div>
+
+                                {/* Login with Google */}
+                                <button type="button" className="w-full block bg-white hover:bg-gray-100 focus:bg-gray-100 text-gray-900 font-semibold rounded-lg px-4 py-3 border border-gray-300">
+                                    <div className="flex items-center justify-center">
+                                        <img src={Google_logo} alt="Google_logo" className='w-8'/>
+                                        <span className="ml-2">Login with Google</span>
+                                    </div>
+                                </button>
+
+                                <p className="mt-8 text-center">Need an account? 
+                                    <Link to={'/register'} className="text-blue-500 hover:text-blue-700 font-semibold">Create an account</Link>
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                    <label htmlFor="remember" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Remember
-                        me</label>
                 </div>
-                <button type="submit"
-                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
-            </form>
+            </div>
         </div>
     )
 }
