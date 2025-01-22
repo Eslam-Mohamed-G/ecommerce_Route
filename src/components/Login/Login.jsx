@@ -85,7 +85,7 @@ function Login() {
                                 </div>
 
                                 {/* password   password   password */}
-                                <div className="relative border">
+                                <div className="relative">
                                     <input 
                                         value={formik.values.password}
                                         onChange={formik.handleChange}
