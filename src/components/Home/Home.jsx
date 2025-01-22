@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import style from './Home.module.css';
 import axios from "axios";
 
-function Templates() {
+function Home() {
     const [products, setProducts] = useState(null);
     async function getAllProducts (){
         try {
@@ -64,4 +64,4 @@ function Templates() {
     )
 }
 
-export default Templates;
+export default Home;
