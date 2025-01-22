@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import style from './Home.module.css';
 import axios from "axios";
+import Slider from 'react-slick';
 
 function Home() {
     const [products, setProducts] = useState(null);
@@ -8,7 +9,7 @@ function Home() {
         try {
             const {data} = await axios.get(`https://ecommerce.routemisr.com/api/v1/products`);
             setProducts(data.data)
-            console.log(data.data);
+            // console.log(data.data);
         } catch (error) {
             console.error('error all products', error);
         }
@@ -23,6 +24,7 @@ function Home() {
     return (
         <div className='text-black'>
             <div className="container mx-auto px-4 sm:px-8">
+                <Slick/>
                 {products ? <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-6'>
                     {products?.map((element) => (
                         <div className="max-w-sm w-full bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all" key={element._id}>
@@ -65,3 +67,76 @@ function Home() {
 }
 
 export default Home;
+
+function Slick() {
+    const settings = {
+        dots: false,
+        infinite: true,
+        autoplay: true,
+        autoplaySpeed: 5000,
+        speed: 2000,
+        slidesToShow: 6,
+        slidesToScroll: 1,
+        arrows: true,
+        easing: "linear",
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: true
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                    initialSlide: 2
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+        ]
+    };
+
+    const [categories, setCategories] = useState([]);
+    async function getAllCategories() {
+        try {
+            const { data } = await axios.get(`https://ecommerce.routemisr.com/api/v1/categories`);
+            setCategories(data.data);
+            console.log(data?.data);
+        } catch (error) {
+            console.error('get All Categories', error);
+        }
+    }
+
+    useEffect(() => {
+        getAllCategories()
+    }, []);
+    return (
+        <div className="slider-container">
+            <Slider {...settings}>
+                {categories?.map((element) => (
+                    <div key={element._id} className='w-16 h-64 px-2'>
+                        <div className='border border-blue-500 rounded overflow-hidden flex flex-col'>
+                            <div className='relative'>
+                                <img src={element.image} alt={element.name} className='block w-full h-48 object-cover' />
+                            </div>
+                            <div className='bg-blue-100 grow'>
+                                <h4 className='text-center'>{element.name}</h4>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </Slider>
+        </div>
+    )
+}
