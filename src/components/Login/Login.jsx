@@ -7,7 +7,11 @@ import * as Yup from 'yup';
 import axios from "axios";
 
 function Login() {
-    const [state, setstate] = useState();
+    const [showPassword, setShowPassword] = useState(false);
+    const togglePasswordVisibility = ()=>{
+        setShowPassword(!showPassword);
+    };
+
     let validator = Yup.object().shape({
         email : Yup.string().required('email is required').email('invalid email'),
         password : Yup.string().required('password is required').matches(/[a-z0-9]{6}$/, 'invalid password')
@@ -93,7 +97,7 @@ function Login() {
                                         autoComplete="off" 
                                         id="password" 
                                         name="password" 
-                                        type="password" 
+                                        type={showPassword ? 'text' : "password"} 
                                         className={`peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600 ${formik.touched.password ? formik.errors.password ? falseMessage : trueMessage : inputGray}`} 
                                         placeholder="Password" 
                                     />
@@ -106,9 +110,8 @@ function Login() {
                                         :
                                         <i className={`${formik.touched.password ? formik.errors.password ? 'hidden' : '' : 'hidden'} absolute top-1/3 end-0 text-green-500 fa-solid fa-check`}></i>
                                     }
-                                    <div className='absolute top-2 end-0'>
-                                        <i className="fa-regular fa-eye"></i>
-                                        <i className="fa-regular fa-eye-slash"></i>
+                                    <div className='absolute top-2 end-0 cursor-pointer' onClick={togglePasswordVisibility}>
+                                        {showPassword ? <i className="fa-regular fa-eye"></i> : <i className="fa-regular fa-eye-slash"></i> }
                                     </div>
                                 </div>
 
