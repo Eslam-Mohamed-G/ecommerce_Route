@@ -17,6 +17,9 @@ function Login() {
             email : '',
             password : ''
         },
+        
+        validationSchema:validator,
+
         onSubmit: (values)=>{
             axios.post(`https://ecommerce.routemisr.com/api/v1/auth/signin`, values)
                 .then( (response) => {
