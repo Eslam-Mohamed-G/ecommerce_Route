@@ -4,6 +4,12 @@ import { NavLink } from 'react-router-dom';
 
 function Templates() {
     const [isScroll, setIsScroll] = useState(false);
+    const [isToggle, setIsToggle] = useState(false);
+    const [header, setIsHeader] = useState('Home');
+    const handleMenu = () => {
+        setIsToggle(!isToggle);
+    };
+
     function handleScroll (){
         if(window.scrollY > 10){
             setIsScroll(true);
@@ -32,15 +38,18 @@ function Templates() {
                 </div>
             </div>
                 <div className={`bg-slate-400/30 flex justify-between align-middle ${isScroll ? 'py-3' : 'py-5'}`}>
-                    <div className='container mx-auto px-9 sm:px-12'>
-                        <button className='block sm:hidden'><i className="fa-solid fa-bars"></i></button>
-                        <div className='hidden sm:block'>
-                            <ul className='flex gap-5'>
-                                <li><NavLink to={'/'}>Home</NavLink></li>
-                                <li><NavLink>Products</NavLink></li>
-                                <li><NavLink>Brands</NavLink></li>
-                                <li><NavLink>Categories</NavLink></li>
-                                <li><NavLink>Cart</NavLink></li>
+                    <div className='container mx-auto px-9 sm:px-12 flex flex-col'>
+                        <div className='flex justify-between sm:hidden'>
+                            <h1>{header}</h1>
+                            <button className='w-fit' onClick={handleMenu}><i className="fa-solid fa-bars"></i></button>
+                        </div>
+                        <div className={`w-full transition-all ease-in-out duration-500 overflow-hidden ${isToggle ? 'h-full' : 'h-0 sm:h-full'}`}>
+                            <ul className='flex flex-col sm:flex-row gap-5'>
+                                <li><NavLink to={'/'} onClick={() => { handleMenu(); setIsHeader("Home") }}>Home</NavLink></li>
+                                <li><NavLink onClick={() => { handleMenu(); setIsHeader("Products") }}>Products</NavLink></li>
+                                <li><NavLink onClick={() => { handleMenu(); setIsHeader("Brands") }}>Brands</NavLink></li>
+                                <li><NavLink onClick={() => { handleMenu(); setIsHeader("Categories") }}>Categories</NavLink></li>
+                                <li><NavLink onClick={() => { handleMenu(); setIsHeader("Cart") }}>Cart</NavLink></li>
                             </ul>
                         </div>
                     </div>
