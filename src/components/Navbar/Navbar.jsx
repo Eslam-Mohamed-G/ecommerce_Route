@@ -31,18 +31,20 @@ function Templates() {
                     </ul>
                 </div>
             </div>
-            <div className={`container mx-auto px-8 sm:px-12 bg-slate-400/30 flex justify-between align-middle ${isScroll ? 'py-3' : 'py-5'}`}>
-                <button className='block sm:hidden'><i className="fa-solid fa-bars"></i></button>
-                <div className='hidden sm:block'>
-                    <ul className='flex gap-5'>
-                        <li><NavLink to={'/'}>Home</NavLink></li>
-                        <li><NavLink>Products</NavLink></li>
-                        <li><NavLink>Brands</NavLink></li>
-                        <li><NavLink>Categories</NavLink></li>
-                        <li><NavLink>Cart</NavLink></li>
-                    </ul>
+                <div className={`bg-slate-400/30 flex justify-between align-middle ${isScroll ? 'py-3' : 'py-5'}`}>
+                    <div className='container mx-auto px-9 sm:px-12'>
+                        <button className='block sm:hidden'><i className="fa-solid fa-bars"></i></button>
+                        <div className='hidden sm:block'>
+                            <ul className='flex gap-5'>
+                                <li><NavLink to={'/'}>Home</NavLink></li>
+                                <li><NavLink>Products</NavLink></li>
+                                <li><NavLink>Brands</NavLink></li>
+                                <li><NavLink>Categories</NavLink></li>
+                                <li><NavLink>Cart</NavLink></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-            </div>
         </div>
         </>
     )
