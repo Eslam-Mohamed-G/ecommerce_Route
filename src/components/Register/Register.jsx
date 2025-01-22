@@ -7,6 +7,7 @@ import axios from "axios";
 
 function Register() {
     const [messageFromBackEnd, setMessageFromBackEnd] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
     let validator = Yup.object().shape({
         name : Yup.string().required('Name is required').min(3, 'min 3 letters'),
@@ -27,14 +28,16 @@ function Register() {
         validationSchema : validator,
 
         onSubmit: (values) => {
+            setIsLoading(true);
             axios.post(`https://ecommerce.routemisr.com/api/v1/auth/signup`, values)
                 .then((resp) => { 
+                    setIsLoading(false);
                     if (resp.data.message = 'success') {
                         localStorage.setItem('userToken', resp?.data?.token)
                         navigate('/login')
                     };
                 })
-                .catch((error) => { console.log(error.response.data.message); setMessageFromBackEnd(error?.response?.data?.message) })
+                .catch((error) => { setIsLoading(false); setMessageFromBackEnd(error?.response?.data?.message) })
         }
     });
     
@@ -165,7 +168,9 @@ function Register() {
                     }
                 </div>
 
-                <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+                <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    {isLoading ? <>Submiting <i className='fas fa-spinner fa-spin'></i></> : 'Submit' }
+                </button>
                 
                 <div className={`relative z-0 w-full mb-6 group text-center ${messageFromBackEnd ? '' : 'hidden' }`}>
                     {messageFromBackEnd ? <p className='text-red-500'>{messageFromBackEnd}</p> : <p className='text-green-500'>succeed</p>}
