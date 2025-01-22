@@ -26,7 +26,11 @@ function Register() {
 
         onSubmit: (values) => {
             axios.post(`https://ecommerce.routemisr.com/api/v1/auth/signup`, values)
-                .then((resp) => { console.log(resp); })
+                .then((resp) => { 
+                    if (resp.data.message = 'success') {
+                        localStorage.setItem('userToken', resp?.data?.token)
+                    }
+                })
                 .catch((error) => { console.log(error.response.data.message); setMessageFromBackEnd(error?.response?.data?.message) })
         }
     });
