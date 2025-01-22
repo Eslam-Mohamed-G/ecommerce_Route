@@ -28,6 +28,7 @@ function Templates() {
                     <ul className='flex gap-5'>
                         <li><NavLink to={'/'}>Home</NavLink></li>
                         <li><NavLink to={'/register'}>Register</NavLink></li>
+                        <li><NavLink to={'/login'}>Login</NavLink></li>
                         <li><NavLink>Products</NavLink></li>
                         <li><NavLink>Brands</NavLink></li>
                         <li><NavLink>Categories</NavLink></li>

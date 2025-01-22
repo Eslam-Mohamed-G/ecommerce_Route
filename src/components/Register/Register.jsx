@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import style from './Register.module.css';
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
@@ -6,6 +7,7 @@ import axios from "axios";
 
 function Register() {
     const [messageFromBackEnd, setMessageFromBackEnd] = useState('');
+    const navigate = useNavigate();
     let validator = Yup.object().shape({
         name : Yup.string().required('Name is required').min(3, 'min 3 letters'),
         email : Yup.string().required('email is required').email('invalid email'),
@@ -29,7 +31,8 @@ function Register() {
                 .then((resp) => { 
                     if (resp.data.message = 'success') {
                         localStorage.setItem('userToken', resp?.data?.token)
-                    }
+                        navigate('/login')
+                    };
                 })
                 .catch((error) => { console.log(error.response.data.message); setMessageFromBackEnd(error?.response?.data?.message) })
         }
