@@ -22,7 +22,7 @@ function Templates() {
 
     return (
         <div className='text-black'>
-            <div className="container mx-auto px-8">
+            <div className="container mx-auto px-4 sm:px-8">
                 <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-6'>
                     {products?.map((element)=>(
                         <div className="max-w-sm w-full bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all" key={element._id}>
