@@ -34,11 +34,15 @@ function Navbar() {
                 <div className='container mx-auto px-8 sm:px-12 py-2 flex justify-between'>
                     <h1 className='block text-lg font-bold'><span className='flex gap-1 items-center'><i className="fa-solid fa-cart-plus"></i>FreshCart</span></h1>
                     <h1>{userLogin?.user?.name}</h1>
-                    <ul className={`flex gap-5 ${userLogin?.token ? 'hidden' : 'block'}`}>
-                        <li><NavLink to={'/register'}>Register</NavLink></li>
-                        <li><NavLink to={'/login'}>Login</NavLink></li>
-                    </ul>
-                    <button className={`${userLogin?.token ? 'block' : 'hidden'}`}>LogOut</button>
+                    {!userLogin?.token 
+                        ?
+                        <ul className='flex gap-5'>
+                            <li><NavLink to={'/register'}>Register</NavLink></li>
+                            <li><NavLink to={'/login'}>Login</NavLink></li>
+                        </ul>
+                        :
+                        <button className=''>LogOut</button>
+                    }
                 </div>
             </div>
             <div className={`bg-slate-400/30 flex justify-between align-middle ${isScroll ? 'py-3' : 'py-5'}`}>
