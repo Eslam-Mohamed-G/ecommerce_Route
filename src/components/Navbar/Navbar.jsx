@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import style from './Navbar.module.css';
 import { NavLink } from 'react-router-dom';
+import { CounterContext } from '../Context/Context';
 
-function Templates() {
+function Navbar() {
     const [isScroll, setIsScroll] = useState(false);
     const [isToggle, setIsToggle] = useState(false);
     const [header, setIsHeader] = useState('Home');
@@ -24,6 +25,8 @@ function Templates() {
             
         };
     }, []);
+
+    const { count } = useContext(CounterContext);
 
     return (
         <div className={`navbar w-full backdrop-blur-sm fixed top-0 transition-all ease-in-out duration-500 z-50`}>
@@ -48,7 +51,7 @@ function Templates() {
                             <li><NavLink onClick={() => { handleMenu(); setIsHeader("Products") }}>Products</NavLink></li>
                             <li><NavLink onClick={() => { handleMenu(); setIsHeader("Brands") }}>Brands</NavLink></li>
                             <li><NavLink onClick={() => { handleMenu(); setIsHeader("Categories") }}>Categories</NavLink></li>
-                            <li><NavLink onClick={() => { handleMenu(); setIsHeader("Cart") }}>Cart</NavLink></li>
+                            <li><NavLink onClick={() => { handleMenu(); setIsHeader("Cart") }}>Cart{count}</NavLink></li>
                         </ul>
                     </div>
                 </div>
@@ -57,4 +60,4 @@ function Templates() {
     )
 }
 
-export default Templates;
+export default Navbar;
