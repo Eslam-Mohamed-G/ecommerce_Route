@@ -5,11 +5,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from "axios";
+import { useContext } from 'react';
+import { dataContext } from '../Context/Context';
 
 function Login() {
     const [messageFromBackEnd, setMessageFromBackEnd] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+    const { userLogin, setUserLogin } = useContext(dataContext);
     const navigate = useNavigate();
     const togglePasswordVisibility = ()=>{
         setShowPassword(!showPassword);
@@ -34,6 +37,8 @@ function Login() {
                     setIsLoading(false);
                     if(response.data.message = 'success') {
                         localStorage.setItem('userToken', response?.data?.token);
+                        setUserLogin( response?.data );
+                        console.log( response?.data);
                         navigate('/')
                     };
                 })

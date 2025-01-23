@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import style from './Register.module.css';
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
 import axios from "axios";
+import { dataContext } from '../Context/Context';
 
 function Register() {
     const [messageFromBackEnd, setMessageFromBackEnd] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
+    const { userLogin, setUserLogin } = useContext(dataContext);
+
     let validator = Yup.object().shape({
         name : Yup.string().required('Name is required').min(3, 'min 3 letters'),
         email : Yup.string().required('email is required').email('invalid email'),
@@ -33,7 +36,8 @@ function Register() {
                 .then((resp) => { 
                     setIsLoading(false);
                     if (resp.data.message = 'success') {
-                        localStorage.setItem('userToken', resp?.data?.token)
+                        localStorage.setItem('userToken', resp?.data?.token);
+                        setUserLogin(resp?.data?.token);
                         navigate('/login')
                     };
                 })

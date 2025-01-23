@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import style from './Home.module.css';
 import axios from "axios";
 import Slider from 'react-slick';
-import { CounterContext } from '../Context/Context';
+import { dataContext } from '../Context/Context';
 
 function Home() {
     const [products, setProducts] = useState(null);
@@ -21,7 +21,7 @@ function Home() {
             
         };
     }, []);
-    const { count, setCount } = useContext(CounterContext);
+    const { count, setCount } = useContext(dataContext);
 
     return (
         <div className='text-black'>

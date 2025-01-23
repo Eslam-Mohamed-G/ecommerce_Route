@@ -1,22 +1,22 @@
 import React, { createContext, useEffect, useState } from 'react';
 import style from './Context.module.css';
 
-export const CounterContext = createContext();
+export const dataContext = createContext();
 
-function CounterContextProvider({ children }) {
-    
+function StoreContextProvider({ children }) {
+
     const [count, setCount] = useState(0);
-    const [userName, setUserName] = useState('ahmed');
+    const [userLogin, setUserLogin] = useState(null);
 
     useEffect(() => {
 
     }, []);
 
     return (
-        <CounterContext.Provider value={{ count, setCount }}>
+        <dataContext.Provider value={{ count, setCount, userLogin, setUserLogin }}>
             {children}
-        </CounterContext.Provider>
+        </dataContext.Provider>
     )
 }
 
-export default CounterContextProvider;
+export default StoreContextProvider;
