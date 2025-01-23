@@ -6,6 +6,7 @@ import Login from './components/Login/Login.jsx';
 import Notfound from './components/Notfound/Notfound.jsx';
 import './App.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import CounterContextProvider from './components/Context/Context.jsx';
 
 function App() {
   const routes = createBrowserRouter([
@@ -21,7 +22,9 @@ function App() {
   ])
 
   return (
-    <RouterProvider router={routes} />
+    <CounterContextProvider>
+      <RouterProvider router={routes} />
+    </CounterContextProvider>
   )
 }
 
