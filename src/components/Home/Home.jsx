@@ -123,9 +123,10 @@ function Slick() {
     }, []);
     return (
         <div className="slider-container">
+            <h1>shop Popular Categories</h1>
             <Slider {...settings}>
                 {categories?.map((element) => (
-                    <div key={element._id} className='w-16 h-64 px-2'>
+                    <div key={element._id} className='w-16 h-64 pr-4'>
                         <div className='border border-blue-500 rounded overflow-hidden flex flex-col'>
                             <div className='relative'>
                                 <img src={element.image} alt={element.name} className='block w-full h-48 object-cover' />
