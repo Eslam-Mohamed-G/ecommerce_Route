@@ -45,7 +45,7 @@ function Navbar() {
                 <div className='container mx-auto px-9 sm:px-12 flex flex-col'>
                     <div className='flex justify-between sm:hidden'>
                         <h1>{header}</h1>
-                        <button className='w-fit' onClick={handleMenu}><i className="fa-solid fa-bars"></i></button>
+                        <button className='w-fit transition-all ease-in-out duration-500' onClick={handleMenu}>{isToggle ? <i className="text-[24px] fa-solid fa-xmark"></i> : <i className="text-[22px] fa-solid fa-bars"></i>}</button>
                     </div>
                     <div className={`w-full transition-all ease-in-out duration-500 overflow-hidden ${isToggle ? 'h-56 pt-5 sm:h-full sm:pt-0' : 'h-0 sm:h-full'}`}>
                         <ul className='flex flex-col sm:flex-row gap-5'>
