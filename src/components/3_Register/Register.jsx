@@ -37,7 +37,6 @@ function Register() {
                     setIsLoading(false);
                     if (resp.data.message === 'success') {
                         localStorage.setItem('userToken', resp?.data?.token);
-                        // setUserLogin(resp?.data?.token);
                         navigate('/login')
                     };
                 })

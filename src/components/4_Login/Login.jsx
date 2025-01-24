@@ -37,7 +37,6 @@ function Login() {
                     setIsLoading(false);
                     if(response.data.message === 'success') {
                         localStorage.setItem('userToken', JSON.stringify(response?.data));
-                        // setUserLogin( response?.data );
                         console.log( response?.data);
                         navigate('/')
                     };
