@@ -27,7 +27,11 @@ function Navbar() {
     }, []);
 
 
-    const { count, userLogin } = useContext(dataContext);
+    const { count, userLogin, setUserLogin } = useContext(dataContext);
+    const handleLogout = () => {
+        localStorage.removeItem('userToken');
+        setUserLogin(null)
+    }
 
     return (
         <div className={`navbar w-full backdrop-blur-sm fixed top-0 transition-all ease-in-out duration-500 z-50`}>
@@ -39,10 +43,10 @@ function Navbar() {
                         ?
                         <ul className='flex gap-5'>
                             <li><NavLink to={'/register'}>Register</NavLink></li>
-                            <li><NavLink to={'/login'}>Login</NavLink></li>
+                            <li><NavLink to={'/login'}><p className='border items-center align-middle'>Login <span><i className="fa-solid fa-right-to-bracket" /></span></p></NavLink></li>
                         </ul>
                         :
-                        <button className=''>LogOut</button>
+                        <button className='' onClick={handleLogout}>LogOut <i className="fa-solid fa-right-from-bracket"></i></button>
                     }
                 </div>
             </div>

@@ -9,8 +9,8 @@ function StoreContextProvider({ children }) {
     const [userLogin, setUserLogin] = useState(null);
 
     useEffect(() => {
-        const token = localStorage.getItem('userToken');
-        if (token) {
+        const token = JSON.parse(localStorage.getItem('userToken'));
+        if (token !== null) {
             setUserLogin(token);
             console.log('local', token);
             // localStorage.clear();
