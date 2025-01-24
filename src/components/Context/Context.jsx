@@ -9,7 +9,12 @@ function StoreContextProvider({ children }) {
     const [userLogin, setUserLogin] = useState(null);
 
     useEffect(() => {
-
+        const token = localStorage.getItem('userToken');
+        if (token) {
+            setUserLogin(token);
+            console.log('local', token);
+            // localStorage.clear();
+        };
     }, []);
 
     return (

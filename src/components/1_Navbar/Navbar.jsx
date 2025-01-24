@@ -11,22 +11,23 @@ function Navbar() {
         setIsToggle(!isToggle);
     };
 
-    function handleScroll (){
-        if(window.scrollY > 10){
-            setIsScroll(true);
-        }else {
-            setIsScroll(false);
-        }
-    }
-    window.addEventListener("scroll", handleScroll);
     useEffect(() => {
-        
+        const handleScroll = () => {
+            if (window.scrollY > 10) {
+                setIsScroll(true);
+            } else {
+                setIsScroll(false);
+            }
+        };
+        window.addEventListener("scroll", handleScroll);
+
         return () => {
-            
+            window.removeEventListener("scroll", handleScroll);
         };
     }, []);
 
-    const { count , userLogin } = useContext(dataContext);
+
+    const { count, userLogin } = useContext(dataContext);
 
     return (
         <div className={`navbar w-full backdrop-blur-sm fixed top-0 transition-all ease-in-out duration-500 z-50`}>
@@ -34,7 +35,7 @@ function Navbar() {
                 <div className='container mx-auto px-8 sm:px-12 py-2 flex justify-between'>
                     <h1 className='block text-lg font-bold'><span className='flex gap-1 items-center'><i className="fa-solid fa-cart-plus"></i>FreshCart</span></h1>
                     <h1>{userLogin?.user?.name}</h1>
-                    {!userLogin?.token 
+                    {!userLogin?.token
                         ?
                         <ul className='flex gap-5'>
                             <li><NavLink to={'/register'}>Register</NavLink></li>

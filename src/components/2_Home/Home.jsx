@@ -115,7 +115,7 @@ function Slick() {
         try {
             const { data } = await axios.get(`https://ecommerce.routemisr.com/api/v1/categories`);
             setCategories(data.data);
-            console.log(data?.data);
+            // console.log(data?.data);
         } catch (error) {
             console.error('get All Categories', error);
         }

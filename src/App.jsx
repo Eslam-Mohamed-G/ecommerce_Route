@@ -1,8 +1,8 @@
 import React from 'react';
-import Register from './components/Register/Register.jsx';
+import Register from './components/3_Register/Register.jsx';
 import Layout from './components/Layout/Layout.jsx';
-import Home from './components/Home/Home.jsx';
-import Login from './components/Login/Login.jsx';
+import Home from './components/2_Home/Home.jsx';
+import Login from './components/4_Login/Login.jsx';
 import Notfound from './components/Notfound/Notfound.jsx';
 import './App.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'

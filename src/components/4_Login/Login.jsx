@@ -35,9 +35,9 @@ function Login() {
             axios.post(`https://ecommerce.routemisr.com/api/v1/auth/signin`, values)
                 .then( (response) => {
                     setIsLoading(false);
-                    if(response.data.message = 'success') {
+                    if(response.data.message === 'success') {
                         localStorage.setItem('userToken', response?.data?.token);
-                        setUserLogin( response?.data );
+                        // setUserLogin( response?.data );
                         console.log( response?.data);
                         navigate('/')
                     };

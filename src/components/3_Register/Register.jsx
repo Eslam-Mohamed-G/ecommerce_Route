@@ -17,7 +17,7 @@ function Register() {
         email : Yup.string().required('email is required').email('invalid email'),
         password : Yup.string().required('password is required').matches(/[a-z0-9]{6}$/, 'invalid password'),
         rePassword : Yup.string().required('rePassword is required').oneOf([Yup.ref('password')], 'invalid rePassword'),
-        phone : Yup.string().required('phone is required').matches(/^01[0125][0-p]{8}$/, 'invalid phone')
+        phone : Yup.string().required('phone is required').matches(/^01[0125][0-9]{8}$/, 'invalid phone')
     });
 
     let formik =  useFormik({
@@ -35,9 +35,9 @@ function Register() {
             axios.post(`https://ecommerce.routemisr.com/api/v1/auth/signup`, values)
                 .then((resp) => { 
                     setIsLoading(false);
-                    if (resp.data.message = 'success') {
+                    if (resp.data.message === 'success') {
                         localStorage.setItem('userToken', resp?.data?.token);
-                        setUserLogin(resp?.data?.token);
+                        // setUserLogin(resp?.data?.token);
                         navigate('/login')
                     };
                 })
