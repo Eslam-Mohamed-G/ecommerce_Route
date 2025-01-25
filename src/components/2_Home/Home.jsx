@@ -3,6 +3,7 @@ import style from './Home.module.css';
 import axios from "axios";
 import Slider from 'react-slick';
 import { dataContext } from '../Context/Context';
+import FadeSlider from './FadeSlider';
 
 function Home() {
     const [products, setProducts] = useState(null);
@@ -10,7 +11,7 @@ function Home() {
         try {
             const {data} = await axios.get(`https://ecommerce.routemisr.com/api/v1/products`);
             setProducts(data.data)
-            // console.log(data.data);
+            console.log(data.data);
         } catch (error) {
             console.error('error all products', error);
         }
@@ -26,6 +27,7 @@ function Home() {
     return (
         <div className='text-black'>
             <div className="container mx-auto px-4 sm:px-8">
+                <FadeSlider/>
                 <Slick/>
                 <button onClick={()=>{setCount(count+1)}}>counter</button>
                 {products ? <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-6'>
@@ -33,6 +35,7 @@ function Home() {
                         <div className="max-w-sm w-full bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all" key={element._id}>
                             <div className="relative overflow-hidden">
                                 <img src={element.imageCover} alt="Product" className="w-full object-contain" />
+                                {/* <img src={element.images[0]} alt="Product" className="w-full object-contain" /> */}
                                 <span className="absolute top-3 right-3 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium">
                                     Sale
                                 </span>
