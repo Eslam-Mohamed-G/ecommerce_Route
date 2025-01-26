@@ -4,6 +4,8 @@ import axios from "axios";
 import Slider from 'react-slick';
 import { dataContext } from '../Context/Context';
 import FadeSlider from './FadeSlider';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 function Home() {
     const [products, setProducts] = useState(null);
@@ -19,7 +21,7 @@ function Home() {
     useEffect(() => {
         getAllProducts()
         return () => {
-            
+            AOS.init({once: false,});
         };
     }, []);
     const { count, setCount } = useContext(dataContext);
