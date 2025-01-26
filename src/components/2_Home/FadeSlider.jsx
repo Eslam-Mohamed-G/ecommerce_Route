@@ -55,8 +55,10 @@ function FadeSlider() {
             <div className="w-full border border-red-500">
                 <div className="flex flex-row justify-between w-full">
                     <div className="flex grow  justify-between" data-aos="zoom-in">
-                        <h1>Dress Sharp Everyday</h1>
-                        <p>We have the premium set of formal wears for to make you look confident and comfortable at your job.</p>
+                        <div>
+                            <h1>Dress Sharp Everyday</h1>
+                            <p>We have the premium set of formal wears for to make you look confident and comfortable at your job.</p>
+                        </div>
                         <img src={clothes} className="w-80 h-[200px] sm:h-[400px]" alt="clothes" />
                     </div>
 
