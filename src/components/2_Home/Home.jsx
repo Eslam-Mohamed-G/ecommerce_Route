@@ -30,7 +30,9 @@ function Home() {
         <div className='text-black'>
             <div className="container mx-auto px-4 sm:px-8">
                 <FadeSlider/>
-                <Slick/>
+                <div data-aos="fade-up">
+                    <Slick/>
+                </div>
                 <button onClick={()=>{setCount(count+1)}}>counter</button>
                 {products ? <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-6'>
                     {products?.map((element) => (
