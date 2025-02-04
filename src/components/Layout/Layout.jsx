@@ -17,7 +17,7 @@ function Templates() {
     return (
         <div>
             <Navbar/>
-            <div className='min-h-dvh container mx-auto px-5 pt-32 dark:bg-slate-950'>
+            <div className='min-h-dvh container mx-auto pt-[109px] dark:bg-slate-950'>
                 <Outlet/>
                 <Toaster/>
             </div>

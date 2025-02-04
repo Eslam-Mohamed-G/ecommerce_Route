@@ -32,7 +32,7 @@ function FadeSlider() {
     }, []);
     return (
         <Slider {...settings}>
-            <div className="w-full border border-red-500">
+            <div className="w-full">
                 <div className="flex flex-row justify-between w-full">
                     <div className="flex grow  justify-between" data-aos="zoom-in">
                         <h1>Finding Your Perfect Shoes</h1>
@@ -52,7 +52,7 @@ function FadeSlider() {
             </div>
 
             {/* 2 */}
-            <div className="w-full border border-red-500">
+            <div className="w-full">
                 <div className="flex flex-row justify-between w-full">
                     <div className="flex grow  justify-between" data-aos="zoom-in">
                         <div>
@@ -75,7 +75,7 @@ function FadeSlider() {
             </div>
 
             {/* 3 */}
-            <div className="w-full border border-red-500">
+            <div className="w-full">
                 <div className="flex flex-row w-full">
                     <div className="flex grow justify-between" data-aos="zoom-in">
                         <h1>Buy Now </h1>

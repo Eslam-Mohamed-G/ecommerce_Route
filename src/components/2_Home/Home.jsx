@@ -28,11 +28,11 @@ function Home() {
 
     return (
         <div className='text-black'>
+            <FadeSlider/>
+            <div data-aos="fade-up">
+                <Slick/>
+            </div>
             <div className="container mx-auto px-4 sm:px-8">
-                <FadeSlider/>
-                <div data-aos="fade-up">
-                    <Slick/>
-                </div>
                 <button onClick={()=>{setCount(count+1)}}>counter</button>
                 {products ? <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-6'>
                     {products?.map((element) => (
@@ -102,7 +102,7 @@ function Slick() {
             {
                 breakpoint: 600,
                 settings: {
-                    slidesToShow: 2,
+                    slidesToShow: 3,
                     slidesToScroll: 2,
                     initialSlide: 2
                 }
@@ -110,7 +110,7 @@ function Slick() {
             {
                 breakpoint: 480,
                 settings: {
-                    slidesToShow: 1,
+                    slidesToShow: 2,
                     slidesToScroll: 1
                 }
             }
