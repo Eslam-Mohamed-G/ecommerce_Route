@@ -52,8 +52,8 @@ function StoreContextProvider({ children }) {
                 { productId: product_Id },
                 { headers: {token: user.token} }
             );
-            console.log(response.data);
-            console.log(response.data.cartId);
+            // console.log(response.data);
+            // console.log(response.data.cartId);
             // console.log(response.data.numOfCartItems);
             // console.log(response.data.data.totalCartPrice);
             // console.log(response.data.data.products);
@@ -84,6 +84,21 @@ function StoreContextProvider({ children }) {
         };
     };
     // for add to cart in 5_Cart component
+
+    const getCartItems = async ()=>{
+        try {
+            const response = await axios.get('https://ecommerce.routemisr.com/api/v1/cart',{ headers: {token: user.token} })
+            console.log(response.data);
+            setSendProductToCart(response.data.data)
+        } catch (error) {
+            console.error('get cart items:' , error);
+        }
+    };
+    useEffect(()=>{
+        if(user?.token){
+            getCartItems();
+        }
+    },[user?.token])
     return (
         <dataContext.Provider value={{ count, setCount, userLogin, setUserLogin, addToCart, productToCart }}>
             {children}

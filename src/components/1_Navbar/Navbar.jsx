@@ -62,7 +62,7 @@ function Navbar() {
                             <li><NavLink onClick={() => { handleMenu(); setIsHeader("Products") }}>Products</NavLink></li>
                             <li><NavLink onClick={() => { handleMenu(); setIsHeader("Brands") }}>Brands</NavLink></li>
                             <li><NavLink onClick={() => { handleMenu(); setIsHeader("Categories") }}>Categories</NavLink></li>
-                            <li><NavLink to={'/cart'} onClick={() => { handleMenu(); setIsHeader("Cart") }}>Cart{productToCart.length}</NavLink></li>
+                            <li><NavLink to={'/cart'} onClick={() => { handleMenu(); setIsHeader("Cart") }}>Cart{productToCart?.products?.length}</NavLink></li>
                         </ul>
                     </div>
                 </div>
