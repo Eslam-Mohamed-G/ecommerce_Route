@@ -3,6 +3,7 @@ import Navbar from '../1_Navbar/Navbar.jsx';
 import Footer from '../6_Footer/Footer.jsx';
 import { Outlet } from 'react-router-dom';
 import style from './Layout.module.css';
+import { Toaster } from 'react-hot-toast';
 
 function Templates() {
     const [state, setstate] = useState();
@@ -18,6 +19,7 @@ function Templates() {
             <Navbar/>
             <div className='min-h-dvh container mx-auto px-5 pt-32 dark:bg-slate-950'>
                 <Outlet/>
+                <Toaster/>
             </div>
             <Footer/>
         </div>

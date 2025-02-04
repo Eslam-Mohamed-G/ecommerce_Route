@@ -7,6 +7,7 @@ import Notfound from './components/Notfound/Notfound.jsx';
 import './App.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import StoreContextProvider from './components/Context/Context.jsx';
+import Cart from './components/5_Cart/Cart.jsx';
 
 function App() {
   const routes = createBrowserRouter([
@@ -16,6 +17,7 @@ function App() {
         { index: true, element: <Home /> },
         { path:'register', element: <Register/>},
         { path:'login', element: <Login/>},
+        { path:'cart', element: <Cart/>},
         { path:'*', element: <Notfound/>},
       ]
     }

@@ -24,7 +24,7 @@ function Home() {
             AOS.init({once: false,});
         };
     }, []);
-    const { count, setCount } = useContext(dataContext);
+    const { count, setCount, addToCart } = useContext(dataContext);
 
     return (
         <div className='text-black'>
@@ -60,7 +60,7 @@ function Home() {
                                         <span className="text-sm text-gray-600 ml-1">({element.ratingsAverage})</span>
                                     </div>
                                 </div>
-                                <button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 rounded-lg transition-colors">
+                                <button onClick={() => addToCart(element._id)} className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 rounded-lg transition-colors">
                                     Add to Cart
                                 </button>
                             </div>
