@@ -58,7 +58,7 @@ function Navbar() {
                     <div className={`w-full transition-all ease-in-out duration-500 overflow-hidden ${isToggle ? 'h-56 pt-5 sm:h-full sm:pt-0' : 'h-0 sm:h-full'}`}>
                         <ul className='flex flex-col sm:flex-row gap-5'>
                             <li><NavLink to={'/'} onClick={() => { handleMenu(); }}>Home</NavLink></li>
-                            <li><NavLink to={'Products'} onClick={() => { handleMenu(); setMenuName('Products') }}>Products</NavLink></li>
+                            <li><NavLink to={'Products'} onClick={() => { handleMenu(); }}>Products</NavLink></li>
                             <li><NavLink onClick={() => { handleMenu(); }}>Brands</NavLink></li>
                             <li><NavLink onClick={() => { handleMenu(); }}>Categories</NavLink></li>
                             <li><NavLink to={`/Cart`} onClick={() => { handleMenu(); }}>Cart{productToCart?.products?.length}</NavLink></li>

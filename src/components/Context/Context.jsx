@@ -7,7 +7,6 @@ export const dataContext = createContext();
 
 function StoreContextProvider({ children }) {
 
-    const [count, setCount] = useState(0);
     const [userLogin, setUserLogin] = useState(null);
 
     useEffect(() => {
@@ -16,6 +15,20 @@ function StoreContextProvider({ children }) {
         return () => {
             setUserLogin(token ? JSON.parse(token) : [])
         };
+    }, []);
+
+    const [products, setProducts] = useState(null);
+    async function getAllProducts (){
+        try {
+            const {data} = await axios.get(`https://ecommerce.routemisr.com/api/v1/products`);
+            setProducts(data.data)
+            console.log(data.data);
+        } catch (error) {
+            console.error('error all products', error);
+        }
+    }
+    useEffect(() => {
+        getAllProducts()
     }, []);
 
     // for add to cart in 5_Cart component
@@ -149,7 +162,7 @@ function StoreContextProvider({ children }) {
         }
     },[user?.token])
     return (
-        <dataContext.Provider value={{ count, setCount, userLogin, setUserLogin, addToCart, productToCart, UpdateCartItem, deleteCartItem, clearAllCartItem }}>
+        <dataContext.Provider value={{ products, userLogin, setUserLogin, addToCart, productToCart, UpdateCartItem, deleteCartItem, clearAllCartItem }}>
             {children}
         </dataContext.Provider>
     )
