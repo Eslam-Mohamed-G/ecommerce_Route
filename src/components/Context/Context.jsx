@@ -90,7 +90,22 @@ function StoreContextProvider({ children }) {
                     // console.log(response.data);
                     return response;
                 }).catch((error)=>{console.error('add cart:', error);});
-    }
+    };
+
+    // Update cart product quantity
+    async function UpdateCartItem ( product_Id, product_Count ){
+        try {
+            const response = await axios.put(`https://ecommerce.routemisr.com/api/v1/cart/${product_Id}`,
+                { count: product_Count }, { headers: { token: user.token } }
+            );
+            getCartItems();
+            return response;
+        } catch (error) {
+            console.error(error);
+        }; 
+    };
+    // Update cart product quantity
+
     const getCartItems = async ()=>{
         try {
             const response = await axios.get('https://ecommerce.routemisr.com/api/v1/cart',{ headers: {token: user.token} })
@@ -105,7 +120,7 @@ function StoreContextProvider({ children }) {
         }
     },[user?.token])
     return (
-        <dataContext.Provider value={{ count, setCount, userLogin, setUserLogin, addToCart, productToCart }}>
+        <dataContext.Provider value={{ count, setCount, userLogin, setUserLogin, addToCart, productToCart, UpdateCartItem }}>
             {children}
         </dataContext.Provider>
     )
