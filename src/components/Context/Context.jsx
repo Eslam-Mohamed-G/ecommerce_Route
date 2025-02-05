@@ -23,19 +23,45 @@ function StoreContextProvider({ children }) {
     const user = storedUser ? JSON.parse(storedUser) : null;
     // console.log(user);
     const [productToCart, setSendProductToCart] = useState([]);
+    const [numOfCartItems, setNumOfCartItems] = useState(0);
+    const [prevnumOfCartItems, setPrevNumOfCartItems] = useState(0);
 
-    useEffect(() => {
-        if (user?.token) {
-            const storedCart = localStorage.getItem(`cart_${user.token}`);
-            if (storedCart) {
-                setSendProductToCart(JSON.parse(storedCart));
-            } else {
-                setSendProductToCart([]); 
-            }
-        }
-    }, [user?.token]);
+    // const addToCart = async ( product_Id ) => {
+    //     if (!product_Id) {
+    //         console.error("No product selected");
+    //         return;
+    //     };
 
-    const addToCart = async ( product_Id ) => {
+    //     if (!user?.token) {
+    //         console.error("User is not logged in");
+    //         toast.error("You are not logged in")
+    //         return;
+    //     }
+    //     try {
+    //         const response = await axios.post(
+    //             'https://ecommerce.routemisr.com/api/v1/cart',
+    //             { productId: product_Id },
+    //             { headers: {token: user.token} }
+    //         );
+    //         getCartItems()
+    //         return response;
+    //         // console.log(response.data);
+    //         // console.log(response.data.cartId);
+    //         // console.log(response.data.numOfCartItems);
+    //         // console.log(response.data.data.totalCartPrice);
+    //         // console.log(response.data.data.products);
+    //         // toast.success(response.data.message);
+    //     } catch (error) {
+    //         console.error('add to cart:', error);
+    //         if (error.response?.status === 401) {
+    //             localStorage.removeItem('userToken');
+    //             window.location.href = '/login';
+    //         }
+    //     };
+    // };
+    // for add to cart in 5_Cart component
+    
+    function addToCart (product_Id) {
         if (!product_Id) {
             console.error("No product selected");
             return;
@@ -46,49 +72,28 @@ function StoreContextProvider({ children }) {
             toast.error("You are not logged in")
             return;
         }
-        try {
-            const response = await axios.post(
-                'https://ecommerce.routemisr.com/api/v1/cart',
-                { productId: product_Id },
-                { headers: {token: user.token} }
-            );
-            // console.log(response.data);
-            // console.log(response.data.cartId);
-            // console.log(response.data.numOfCartItems);
-            // console.log(response.data.data.totalCartPrice);
-            // console.log(response.data.data.products);
-            // toast.success(response.data.message);
-            const addedProduct = response.data.data.products.find(
-                (product) => product.product === product_Id
-            );
-            setSendProductToCart((prevCart) => {
-                const isExist = prevCart.some((item) => item?.product === product_Id);
-
-                if (!isExist) {
-                    const updatedCart = [...prevCart, addedProduct];
-                    localStorage.setItem(`cart_${user.token}`, JSON.stringify(updatedCart));
-                    toast.success(response.data.message);
-                    
-                    return updatedCart;
-                }else{
-                    toast.error("already exist")
-                }
-                return prevCart;
-            });
-        } catch (error) {
-            console.error('add to cart:', error);
-            if (error.response?.status === 401) {
-                localStorage.removeItem('userToken');
-                window.location.href = '/login';
-            }
-        };
-    };
-    // for add to cart in 5_Cart component
-
+        
+        return axios
+                .post(
+                    'https://ecommerce.routemisr.com/api/v1/cart',
+                    { productId: product_Id },
+                    { headers: {token: user.token} }
+                ).then((response)=>{
+                    setNumOfCartItems(response.data.numOfCartItems);
+                    setPrevNumOfCartItems(numOfCartItems);
+                    if(numOfCartItems > prevnumOfCartItems){
+                        toast.success('Product added successfully to your cart')
+                        getCartItems();
+                    }else {
+                        toast.error("already exist")
+                    }
+                    // console.log(response.data);
+                    return response;
+                }).catch((error)=>{console.error('add cart:', error);});
+    }
     const getCartItems = async ()=>{
         try {
             const response = await axios.get('https://ecommerce.routemisr.com/api/v1/cart',{ headers: {token: user.token} })
-            console.log(response.data);
             setSendProductToCart(response.data.data)
         } catch (error) {
             console.error('get cart items:' , error);
