@@ -3,6 +3,7 @@ import style from './Cart.module.css';
 import { useContext } from 'react';
 import { dataContext } from '../Context/Context';
 import AOS from 'aos';
+import { NavLink } from 'react-router-dom';
 
 function Cart() {
     const { productToCart, UpdateCartItem, deleteCartItem, clearAllCartItem } = useContext(dataContext);
@@ -49,7 +50,8 @@ function Cart() {
                             </div>
                         </div>
                     ))}
-                    <button onClick={clearAllCartItem} className='bg-red-600 text-red-50 py-1 px-2 rounded-lg shadow-md'>clear all item</button>
+                    <button onClick={clearAllCartItem} className='bg-red-600 text-red-50 py-1 px-2 rounded-lg shadow-md me-5'>clear all item</button>
+                    <button className='rounded-lg py-1 px-3 mt-4 bg-gradient-to-r from-blue-300 to-blue-600 shadow-lg'><NavLink to={'/payment'}>Payment</NavLink></button>
                 </div>
             )}
         </div>

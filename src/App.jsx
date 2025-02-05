@@ -10,6 +10,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import StoreContextProvider from './components/Context/Context.jsx';
 import Cart from './components/5_Cart/Cart.jsx';
 import Products from './components/6_products/Products.jsx';
+import Payment from './components/7_payment/Payment.jsx';
 
 function App() {
   const routes = createBrowserRouter([
@@ -21,6 +22,7 @@ function App() {
         { path:'login', element: <Login/>},
         { path:'cart', element: <Cart/>},
         { path:'Products', element: <Products/>},
+        { path:'payment', element: <Payment/>},
         { path:'*', element: <Notfound/>},
       ]
     }
