@@ -81,10 +81,10 @@ function StoreContextProvider({ children }) {
                     const newNumOfCartItems = response.data.numOfCartItems;
                     setNumOfCartItems(newNumOfCartItems);
                     if (newNumOfCartItems > numOfCartItems) {
-                        toast.success('Product added successfully to your cart');
+                        toast.success('added successfully');
                         getCartItems();
                     } else {
-                        toast.error("Product already exists in your cart");
+                        toast.error("already exists");
                     }
         
                     // console.log(response.data);
