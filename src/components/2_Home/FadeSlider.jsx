@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import Slider from 'react-slick';
 import AOS from 'aos';
-import 'aos/dist/aos.css';
 import Shose from '../../assets/shose.jpeg';
 import Shose2 from '../../assets/card-item1.jpg';
 import Shose3 from '../../assets/card-item3.jpg';

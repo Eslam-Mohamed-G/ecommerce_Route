@@ -2,21 +2,23 @@ import React, { useEffect, useState } from 'react';
 import style from './Cart.module.css';
 import { useContext } from 'react';
 import { dataContext } from '../Context/Context';
+import AOS from 'aos';
 
 function Cart() {
     const { productToCart } = useContext(dataContext);
+    AOS.init({once: false,});
     // console.log(productToCart);
 
     return (
         <div className="container mx-auto px-3 sm:px-8">
-            <h1 className="text-2xl font-bold mb-4 lg:px-36">Your Cart</h1>
+            <h1 className="text-2xl capitalize font-bold mb-4 lg:px-36 flex justify-between"><span data-aos="fade-right">your cart</span> <span data-aos="fade-left" className='bg-gradient-to-r from-blue-300 to-blue-600 bg-clip-text text-transparent'>total price: {productToCart.totalCartPrice}</span></h1>
 
             {productToCart.length === 0 ? (
                 <p>Your cart is empty.</p>
             ) : (
                 <div className="relative lg:px-36">
                     {productToCart?.products?.map((product, index) => (
-                        <div key={index} className="flex flex-col justify-between items-center mb-3 p-1 sm:p-4 border overflow-x-auto shadow-md rounded-lg">
+                        <div data-aos="fade-up" key={index} className="flex flex-col justify-between items-center mb-3 p-1 sm:p-4 border overflow-x-auto shadow-md rounded-lg">
 
                             <div className="flex justify-between items-center p-1 w-full">
                                 <p>{product.product.title.split(' ').slice(0, 3).join(' ')}</p>

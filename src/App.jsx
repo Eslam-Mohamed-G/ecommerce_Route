@@ -5,6 +5,7 @@ import Home from './components/2_Home/Home.jsx';
 import Login from './components/4_Login/Login.jsx';
 import Notfound from './components/Notfound/Notfound.jsx';
 import './App.css';
+import 'aos/dist/aos.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import StoreContextProvider from './components/Context/Context.jsx';
 import Cart from './components/5_Cart/Cart.jsx';
@@ -19,7 +20,7 @@ function App() {
         { path:'register', element: <Register/>},
         { path:'login', element: <Login/>},
         { path:'/:cart', element: <Cart/>},
-        { path:'/:products', element: <Products/>},
+        { path:'Products', element: <Products/>},
         { path:'*', element: <Notfound/>},
       ]
     }
