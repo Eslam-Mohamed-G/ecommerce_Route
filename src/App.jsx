@@ -8,6 +8,7 @@ import './App.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import StoreContextProvider from './components/Context/Context.jsx';
 import Cart from './components/5_Cart/Cart.jsx';
+import Products from './components/6_products/Products.jsx';
 
 function App() {
   const routes = createBrowserRouter([
@@ -17,7 +18,8 @@ function App() {
         { index: true, element: <Home /> },
         { path:'register', element: <Register/>},
         { path:'login', element: <Login/>},
-        { path:'cart', element: <Cart/>},
+        { path:'/:cart', element: <Cart/>},
+        { path:'/:products', element: <Products/>},
         { path:'*', element: <Notfound/>},
       ]
     }

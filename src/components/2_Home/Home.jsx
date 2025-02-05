@@ -28,8 +28,10 @@ function Home() {
 
     return (
         <div className='text-black'>
-            <FadeSlider/>
-            <div data-aos="fade-up">
+            <div className='mb-4 border-b shadow-md'>
+                <FadeSlider/>
+            </div>
+            <div data-aos="fade-up" className='container px-4 mx-auto'>
                 <Slick/>
             </div>
             <div className="container mx-auto px-4 sm:px-8">
@@ -133,13 +135,13 @@ function Slick() {
     }, []);
     return (
         <div className="slider-container">
-            <h1>shop Popular Categories</h1>
+            <h1 className='ps-2 pb-2'>shop Popular Categories</h1>
             <Slider {...settings}>
                 {categories?.map((element) => (
-                    <div key={element._id} className='w-16 h-64 pr-4'>
+                    <div key={element._id} className='w-16 h-64 px-2'>
                         <div className='border border-blue-500 rounded overflow-hidden flex flex-col'>
                             <div className='relative'>
-                                <img src={element.image} alt={element.name} className='block w-full h-48 object-cover' />
+                                <img src={element.image} alt={element.name} className='block w-full h-36 sm:h-48 object-cover' />
                             </div>
                             <div className='bg-blue-100 grow'>
                                 <h4 className='text-center'>{element.name}</h4>

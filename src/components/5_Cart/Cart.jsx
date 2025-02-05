@@ -8,7 +8,7 @@ function Cart() {
     // console.log(productToCart);
 
     return (
-        <div className="container mx-auto px-0 sm:px-8">
+        <div className="container mx-auto px-3 sm:px-8">
             <h1 className="text-2xl font-bold mb-4 lg:px-36">Your Cart</h1>
 
             {productToCart.length === 0 ? (
@@ -16,7 +16,7 @@ function Cart() {
             ) : (
                 <div className="relative lg:px-36">
                     {productToCart?.products?.map((product, index) => (
-                        <div key={index} className="flex flex-col justify-between items-center mb-3 sm:p-4 border overflow-x-auto shadow-md rounded-lg">
+                        <div key={index} className="flex flex-col justify-between items-center mb-3 p-1 sm:p-4 border overflow-x-auto shadow-md rounded-lg">
 
                             <div className="flex justify-between items-center p-1 w-full">
                                 <p>{product.product.title.split(' ').slice(0, 3).join(' ')}</p>

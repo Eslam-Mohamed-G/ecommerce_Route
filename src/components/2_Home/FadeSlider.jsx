@@ -14,7 +14,7 @@ import DualSense3 from '../../assets/DualSense.jpeg';
 
 function FadeSlider() {
     const settings = {
-        dots: true,
+        dots: false,
         fade: true,
         infinite: true,
         autoplay: true,
@@ -34,9 +34,12 @@ function FadeSlider() {
         <Slider {...settings}>
             <div className="w-full">
                 <div className="flex flex-row justify-between w-full">
-                    <div className="flex grow  justify-between" data-aos="zoom-in">
-                        <h1>Finding Your Perfect Shoes</h1>
-                        <img src={Shose} className="w-80 h-[200px] sm:h-[400px]" alt="shose" />
+                    <div className="flex grow justify-between items-center bg-[#dfdfdf]" data-aos="zoom-in">
+                        <div className='ps-4 sm:ps-12'>
+                            <h1>Finding Your Perfect Shoes</h1>
+                            <button className='rounded py-1 px-3 mt-4 bg-gradient-to-r from-blue-300 to-blue-600 shadow-lg'>shop now</button>
+                        </div>
+                        <img src={Shose} className="w-40 sm:w-80 h-[200px] sm:h-[400px]" alt="clothes" />
                     </div>
 
                     <div className="w-[320px] hidden md:block">
@@ -54,17 +57,18 @@ function FadeSlider() {
             {/* 2 */}
             <div className="w-full">
                 <div className="flex flex-row justify-between w-full">
-                    <div className="flex grow  justify-between" data-aos="zoom-in">
-                        <div>
+                    <div className="flex grow justify-between items-center bg-[#f0f0f0]" data-aos="zoom-in">
+                        <div className='ps-4 sm:ps-12'>
                             <h1>Dress Sharp Everyday</h1>
-                            <p>We have the premium set of formal wears for to make you look confident and comfortable at your job.</p>
+                            <button className='rounded py-1 px-3 mt-4 bg-gradient-to-r from-blue-300 to-blue-600 shadow-lg'>shop now</button>
+                            {/* <p>We have the premium set of formal wears for to make you look confident and comfortable at your job.</p> */}
                         </div>
-                        <img src={clothes} className="w-80 h-[200px] sm:h-[400px]" alt="clothes" />
+                        <img src={clothes} className="w-40 sm:w-80 h-[200px] sm:h-[400px]" alt="clothes" />
                     </div>
 
                     <div className="w-[320px] hidden md:block">
                         <div className='' data-aos="fade-down">
-                            <img src={clothes1} className="block w-80 h-[200px]" alt="shose" />
+                            <img src={clothes1} className="block w-40 sm:w-80 h-[200px]" alt="shose" />
                         </div>
 
                         <div data-aos="fade-up">
@@ -77,9 +81,12 @@ function FadeSlider() {
             {/* 3 */}
             <div className="w-full">
                 <div className="flex flex-row w-full">
-                    <div className="flex grow justify-between" data-aos="zoom-in">
-                        <h1>Buy Now </h1>
-                        <img src={DualSense} className="w-80" alt="shose" />
+                    <div className="flex grow justify-between items-center bg-[#e9ebec]" data-aos="zoom-in">
+                        <div className='ps-4 sm:ps-12'>
+                            <h1>buy now</h1>
+                            <button className='rounded py-1 px-3 mt-4 bg-gradient-to-r from-blue-300 to-blue-600 shadow-lg'>shop now</button>
+                        </div>
+                        <img src={DualSense} className="w-40 sm:w-80 h-[200px] sm:h-[400px]" alt="clothes" />
                     </div>
 
                     <div className="w-[320px] hidden md:block">
