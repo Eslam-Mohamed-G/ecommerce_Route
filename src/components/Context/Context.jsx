@@ -106,6 +106,20 @@ function StoreContextProvider({ children }) {
     };
     // Update cart product quantity
 
+    // DELETE Remove specific cart Item
+    async function deleteCartItem ( product_Id ){
+        try {
+            const response = await axios.delete(`https://ecommerce.routemisr.com/api/v1/cart/${product_Id}`,
+                { headers: { token: user.token } }
+            );
+            getCartItems();
+            return response;
+        } catch (error) {
+            console.error(error);
+        }; 
+    };
+    // DELETERemove specific cart Item
+
     const getCartItems = async ()=>{
         try {
             const response = await axios.get('https://ecommerce.routemisr.com/api/v1/cart',{ headers: {token: user.token} })
@@ -120,7 +134,7 @@ function StoreContextProvider({ children }) {
         }
     },[user?.token])
     return (
-        <dataContext.Provider value={{ count, setCount, userLogin, setUserLogin, addToCart, productToCart, UpdateCartItem }}>
+        <dataContext.Provider value={{ count, setCount, userLogin, setUserLogin, addToCart, productToCart, UpdateCartItem, deleteCartItem }}>
             {children}
         </dataContext.Provider>
     )

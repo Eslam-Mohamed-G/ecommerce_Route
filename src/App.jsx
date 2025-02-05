@@ -19,7 +19,7 @@ function App() {
         { index: true, element: <Home /> },
         { path:'register', element: <Register/>},
         { path:'login', element: <Login/>},
-        { path:'/:cart', element: <Cart/>},
+        { path:'cart', element: <Cart/>},
         { path:'Products', element: <Products/>},
         { path:'*', element: <Notfound/>},
       ]

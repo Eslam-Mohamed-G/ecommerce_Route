@@ -6,8 +6,6 @@ import { dataContext } from '../Context/Context';
 function Navbar() {
     const [isScroll, setIsScroll] = useState(false);
     const [isToggle, setIsToggle] = useState(false);
-    const navigate = useNavigate();
-    const { cart } = useParams();
     const handleMenu = () => {
         setIsToggle(!isToggle);
     };
@@ -54,7 +52,7 @@ function Navbar() {
             <div className={`bg-slate-400/30 flex justify-between align-middle ${isScroll ? 'py-3' : 'py-5'}`}>
                 <div className='container mx-auto px-4 sm:px-12 flex flex-col'>
                     <div className='flex justify-between sm:hidden'>
-                        <h1 className='capitalize'>{cart ? cart : 'home'}</h1>
+                        <h1 className='capitalize'>home</h1>
                         <button className='w-fit transition-all ease-in-out duration-500' onClick={handleMenu}>{isToggle ? <i className="text-[24px] fa-solid fa-xmark"></i> : <i className="text-[22px] fa-solid fa-bars"></i>}</button>
                     </div>
                     <div className={`w-full transition-all ease-in-out duration-500 overflow-hidden ${isToggle ? 'h-56 pt-5 sm:h-full sm:pt-0' : 'h-0 sm:h-full'}`}>
@@ -63,7 +61,7 @@ function Navbar() {
                             <li><NavLink to={'Products'} onClick={() => { handleMenu(); setMenuName('Products') }}>Products</NavLink></li>
                             <li><NavLink onClick={() => { handleMenu(); }}>Brands</NavLink></li>
                             <li><NavLink onClick={() => { handleMenu(); }}>Categories</NavLink></li>
-                            <li><NavLink to={`/Cart${productToCart?.products?.length}`} onClick={() => { handleMenu(); navigate(`Cart${productToCart?.products?.length}`); }}>Cart{productToCart?.products?.length}</NavLink></li>
+                            <li><NavLink to={`/Cart`} onClick={() => { handleMenu(); }}>Cart{productToCart?.products?.length}</NavLink></li>
                         </ul>
                     </div>
                 </div>

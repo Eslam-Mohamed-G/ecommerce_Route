@@ -5,7 +5,7 @@ import { dataContext } from '../Context/Context';
 import AOS from 'aos';
 
 function Cart() {
-    const { productToCart, UpdateCartItem } = useContext(dataContext);
+    const { productToCart, UpdateCartItem, deleteCartItem } = useContext(dataContext);
     AOS.init({once: false,});
     // console.log(productToCart);
 
@@ -22,7 +22,7 @@ function Cart() {
 
                             <div className="flex justify-between items-center p-1 w-full">
                                 <p>{product.product.title.split(' ').slice(0, 3).join(' ')}</p>
-                                <button className='bg-red-600 text-red-50 py-1 px-2 rounded-lg shadow-md'>remove</button>
+                                <button onClick={()=>{deleteCartItem(product.product._id)}} className='bg-red-600 text-red-50 py-1 px-2 rounded-lg shadow-md'>remove</button>
                             </div>
 
                             <div className="flex justify-between items-center p-1 w-full">
