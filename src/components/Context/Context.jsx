@@ -22,7 +22,7 @@ function StoreContextProvider({ children }) {
         try {
             const {data} = await axios.get(`https://ecommerce.routemisr.com/api/v1/products`);
             setProducts(data.data)
-            console.log(data.data);
+            // console.log(data.data);
         } catch (error) {
             console.error('error all products', error);
         }
@@ -151,7 +151,7 @@ function StoreContextProvider({ children }) {
         try {
             const response = await axios.get('https://ecommerce.routemisr.com/api/v1/cart',{ headers: {token: user.token} })
             setSendProductToCart(response.data.data)
-            console.log(response.data.data);
+            console.log(response.data);
         } catch (error) {
             console.error('get cart items:' , error);
         }

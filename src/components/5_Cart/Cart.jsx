@@ -14,7 +14,7 @@ function Cart() {
         <div className="container mx-auto px-3 sm:px-8">
             <h1 className="sm:text-2xl capitalize font-bold mb-4 lg:px-36 flex justify-between"><span data-aos="fade-right">your cart</span> <span data-aos="fade-left" className={`bg-gradient-to-r from-blue-300 to-blue-600 bg-clip-text text-transparent ${productToCart?.products?.length === 0 ? 'bg-none': ''}`}>total price: {productToCart.totalCartPrice}</span></h1>
 
-            {productToCart?.products?.length === 0 ? (
+            {productToCart?.products?.length < 1 ? (
                 <p>Your cart is empty.</p>
             ) : (
                 <div className="relative lg:px-36">
