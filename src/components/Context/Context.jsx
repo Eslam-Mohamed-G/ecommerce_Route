@@ -24,7 +24,6 @@ function StoreContextProvider({ children }) {
     // console.log(user);
     const [productToCart, setSendProductToCart] = useState([]);
     const [numOfCartItems, setNumOfCartItems] = useState(0);
-    const [prevnumOfCartItems, setPrevNumOfCartItems] = useState(0);
 
     // const addToCart = async ( product_Id ) => {
     //     if (!product_Id) {
@@ -79,14 +78,15 @@ function StoreContextProvider({ children }) {
                     { productId: product_Id },
                     { headers: {token: user.token} }
                 ).then((response)=>{
-                    setNumOfCartItems(response.data.numOfCartItems);
-                    setPrevNumOfCartItems(numOfCartItems);
-                    if(numOfCartItems > prevnumOfCartItems){
-                        toast.success('Product added successfully to your cart')
+                    const newNumOfCartItems = response.data.numOfCartItems;
+                    setNumOfCartItems(newNumOfCartItems);
+                    if (newNumOfCartItems > numOfCartItems) {
+                        toast.success('Product added successfully to your cart');
                         getCartItems();
-                    }else {
-                        toast.error("already exist")
+                    } else {
+                        toast.error("Product already exists in your cart");
                     }
+        
                     // console.log(response.data);
                     return response;
                 }).catch((error)=>{console.error('add cart:', error);});
