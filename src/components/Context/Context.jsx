@@ -162,7 +162,7 @@ function StoreContextProvider({ children }) {
         }
     },[user?.token])
     return (
-        <dataContext.Provider value={{ products, userLogin, setUserLogin, addToCart, productToCart, UpdateCartItem, deleteCartItem, clearAllCartItem }}>
+        <dataContext.Provider value={{ products, userLogin, setUserLogin, addToCart, productToCart, getCartItems, UpdateCartItem, deleteCartItem, clearAllCartItem }}>
             {children}
         </dataContext.Provider>
     )

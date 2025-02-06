@@ -4,11 +4,12 @@ import * as Yup from 'yup';
 import axios from "axios";
 import AOS from 'aos';
 import { dataContext } from '../Context/Context';
+import toast from 'react-hot-toast';
 
 function Payment() {
     const [isLoading, setIsLoading] = useState(false);
     const [messageFromBackEnd, setMessageFromBackEnd] = useState('');
-    const { productToCart } = useContext(dataContext);
+    const { productToCart, getCartItems } = useContext(dataContext);
     const storedUser = localStorage.getItem('userToken');
     const user = storedUser ? JSON.parse(storedUser) : null;
     // console.log(productToCart);
@@ -33,6 +34,10 @@ function Payment() {
                     headers : {token: user?.token} } 
                 ).then((response)=>{
                     setIsLoading(false);
+                    if(response.data.status === 'success'){
+                        toast.success('products well come soon....');
+                        getCartItems();
+                    };
                     console.log(response.data);
                 }).catch((error)=>{ setIsLoading(false); setMessageFromBackEnd(error?.response?.data?.message); console.error('payment error:', error?.response?.data?.message);})
         }
