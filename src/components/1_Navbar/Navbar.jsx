@@ -59,11 +59,11 @@ function Navbar() {
                     </div>
                     <div className={`w-full transition-all ease-in-out duration-500 overflow-hidden ${isToggle ? 'h-56 pt-5 sm:h-full sm:pt-0' : 'h-0 sm:h-full'}`}>
                         <ul className='flex flex-col sm:flex-row gap-5'>
-                            <li><NavLink to={'/'} onClick={() => { handleMenu(); }}>Home</NavLink></li>
-                            <li><NavLink to={'Products'} onClick={() => { handleMenu(); }}>Products</NavLink></li>
-                            <li><NavLink onClick={() => { handleMenu(); }}>Brands</NavLink></li>
-                            <li><NavLink onClick={() => { handleMenu(); }}>Categories</NavLink></li>
-                            <li className={`${user?.token ? '' : 'hidden'}`}><NavLink to={`/Cart`} onClick={() => { handleMenu(); }} className='border border-red-500'>Cart{productToCart?.products?.length}</NavLink></li>
+                            <li className='flex'><NavLink to={'/'} onClick={() => { handleMenu(); }} className='w-full border-b border-blue-500 sm:border-none'>Home</NavLink></li>
+                            <li className='flex'><NavLink to={'Products'} onClick={() => { handleMenu(); }} className='w-full border-b border-blue-500 sm:border-none'>Products</NavLink></li>
+                            <li className='flex'><NavLink onClick={() => { handleMenu(); }} className='w-full border-b border-blue-500 sm:border-none'>Brands</NavLink></li>
+                            <li className='flex'><NavLink onClick={() => { handleMenu(); }} className='w-full border-b border-blue-500 sm:border-none'>Categories</NavLink></li>
+                            <li className={`flex ${user?.token ? '' : 'hidden'}`}><NavLink to={`/Cart`} onClick={() => { handleMenu(); }} className='w-full border-b border-blue-500 sm:border-none'>Cart{productToCart?.products?.length}</NavLink></li>
                         </ul>
                     </div>
                 </div>
