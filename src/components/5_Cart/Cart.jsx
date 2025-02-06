@@ -11,19 +11,18 @@ function Cart() {
     // console.log(productToCart);
 
     return (
-        <div className="container mx-auto px-3 sm:px-8">
-            <h1 className="sm:text-2xl capitalize font-bold mb-4 lg:px-36 flex justify-between"><span data-aos="fade-right">your cart</span> <span data-aos="fade-left" className={`bg-gradient-to-r from-blue-300 to-blue-600 bg-clip-text text-transparent ${productToCart?.products?.length === 0 ? 'bg-none': ''}`}>total price: {productToCart.totalCartPrice}</span></h1>
-
+        <div className="container mx-auto px-3 sm:px-8 pt-8">
             {productToCart?.products?.length < 1 ? (
-                <p>Your cart is empty.</p>
+                <p className='lg:px-36 text-center'>Your cart is empty.</p>
             ) : (
                 <div className="relative lg:px-36">
+                    <h1 className="sm:text-2xl capitalize font-bold mb-4 lg:px-36 flex justify-between"><span data-aos="fade-right">your cart</span> <span data-aos="fade-left" className='bg-gradient-to-r from-blue-300 to-blue-600 bg-clip-text text-transparent'>total price: {productToCart.totalCartPrice}</span></h1>
                     {productToCart?.products?.map((product, index) => (
                         <div data-aos="fade-up" key={index} className="flex flex-col justify-between items-center mb-3 p-1 sm:p-4 border overflow-x-auto shadow-md rounded-lg">
 
                             <div className="flex justify-between items-center p-1 w-full">
                                 <p>{product.product.title.split(' ').slice(0, 3).join(' ')}</p>
-                                <button onClick={()=>{deleteCartItem(product.product._id)}} className='bg-red-600 text-red-50 py-1 px-2 rounded-lg shadow-md'><i className="fa-solid fa-trash" />Remove</button>
+                                <button onClick={() => { deleteCartItem(product.product._id) }} className='bg-red-600 text-red-50 py-1 px-2 rounded-lg shadow-md'><i className="fa-solid fa-trash" />Remove</button>
                             </div>
 
                             <div className="flex justify-between items-center p-1 w-full">
@@ -36,13 +35,13 @@ function Cart() {
                                         <p>total</p>
                                     </div>
                                     <div className="flex gap-2 items-center justify-center">
-                                        <button onClick={()=>{UpdateCartItem(product.product._id, product.count-1);}} className="inline-flex items-center justify-center p-1 me-3 text-sm font-medium h-6 w-6 text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
-                                            <span><i className="fa-solid fa-minus"/></span>
+                                        <button onClick={() => { UpdateCartItem(product.product._id, product.count - 1); }} className="inline-flex items-center justify-center p-1 me-3 text-sm font-medium h-6 w-6 text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
+                                            <span><i className="fa-solid fa-minus" /></span>
                                         </button>
                                         <div>
                                             <input type="number" className="bg-gray-50 w-16 sm:w-20 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder={product.count} disabled />
                                         </div>
-                                        <button onClick={()=>{UpdateCartItem(product.product._id, product.count + 1)}} className="inline-flex items-center justify-center h-6 w-6 p-1 ms-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
+                                        <button onClick={() => { UpdateCartItem(product.product._id, product.count + 1) }} className="inline-flex items-center justify-center h-6 w-6 p-1 ms-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
                                             <span><i className="fa-solid fa-plus" /></span>
                                         </button>
                                     </div>

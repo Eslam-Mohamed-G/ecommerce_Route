@@ -31,7 +31,7 @@ function Home() {
             <div className='mb-4 border-b shadow-md'>
                 <FadeSlider/>
             </div>
-            <div data-aos="fade-up" className='container px-4 mx-auto'>
+            <div data-aos="fade-up" className='container px-2 xl:px-10 mx-auto'>
                 <Slick/>
             </div>
             <div className="container mx-auto px-4 sm:px-8">
