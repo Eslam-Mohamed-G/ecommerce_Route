@@ -10,6 +10,8 @@ function Payment() {
     const [isLoading, setIsLoading] = useState(false);
     const [messageFromBackEnd, setMessageFromBackEnd] = useState('');
     const { productToCart, getCartItems } = useContext(dataContext);
+
+    // user data from localstorage
     const storedUser = localStorage.getItem('userToken');
     const user = storedUser ? JSON.parse(storedUser) : null;
     // console.log(productToCart);
@@ -20,6 +22,19 @@ function Payment() {
         city: Yup.string().required('city is required'),
     });
 
+    async function payOnline( values ){
+        await axios.post(`https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${productToCart._id}?url=http://localhost:5173`,
+            { shippingAddress : values },{ headers : {token: user?.token} } 
+            ).then((response)=>{
+                console.log(response.data);
+                if (response.data.status === 'success') {
+                    toast.success('products well come soon....');
+                    window.open(response.data.session)
+                    getCartItems();
+                };
+            }).catch((error)=>{console.error('payOnline', error);})
+    };
+
     const formik = useFormik({
         initialValues: {
             details: '',
@@ -27,20 +42,21 @@ function Payment() {
             city: ''
         },
         validationSchema: validator,
-        onSubmit: (values)=>{
-            setIsLoading(true);
-            axios
-                .post(`https://ecommerce.routemisr.com/api/v1/orders/${productToCart._id}`,{ shippingAddress : values },{ 
-                    headers : {token: user?.token} } 
-                ).then((response)=>{
-                    setIsLoading(false);
-                    if(response.data.status === 'success'){
-                        toast.success('products well come soon....');
-                        getCartItems();
-                    };
-                    console.log(response.data);
-                }).catch((error)=>{ setIsLoading(false); setMessageFromBackEnd(error?.response?.data?.message); console.error('payment error:', error?.response?.data?.message);})
-        }
+        onSubmit: payOnline
+        // onSubmit: (values)=>{
+        //     setIsLoading(true);
+        //     axios
+        //         .post(`https://ecommerce.routemisr.com/api/v1/orders/${productToCart._id}`,{ shippingAddress : values },{ 
+        //             headers : {token: user?.token} } 
+        //         ).then((response)=>{
+        //             setIsLoading(false);
+        //             if(response.data.status === 'success'){
+        //                 toast.success('products well come soon....');
+        //                 getCartItems();
+        //             };
+        //             console.log(response.data);
+        //         }).catch((error)=>{ setIsLoading(false); setMessageFromBackEnd(error?.response?.data?.message); console.error('payment error:', error?.response?.data?.message);})
+        // }
     });
 
     const inputGray = "border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 min-w-0 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500";
