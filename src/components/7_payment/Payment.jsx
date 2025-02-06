@@ -7,6 +7,7 @@ import { dataContext } from '../Context/Context';
 import toast from 'react-hot-toast';
 
 function Payment() {
+    const [cashOrOnline, setCashOrOnline] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
     const [messageFromBackEnd, setMessageFromBackEnd] = useState('');
     const { productToCart, getCartItems } = useContext(dataContext);
@@ -29,11 +30,29 @@ function Payment() {
                 console.log(response.data);
                 if (response.data.status === 'success') {
                     toast.success('products well come soon....');
-                    window.open(response.data.session)
+                    window.open(response.data.session.url)
                     getCartItems();
                 };
-            }).catch((error)=>{console.error('payOnline', error);})
+            }).catch((error)=>{ setIsLoading(false); setMessageFromBackEnd(error?.response?.data?.message);})
     };
+
+    async function payCash( values ){
+        setIsLoading(true);
+        await axios.post(`https://ecommerce.routemisr.com/api/v1/orders/${productToCart._id}`,
+            { shippingAddress : values },{ headers : {token: user?.token} } 
+            ).then((response)=>{
+                setIsLoading(false);
+                // console.log(response.data);
+                if (response.data.status === 'success') {
+                    toast.success('products well come soon....');
+                    getCartItems();
+                };
+            }).catch((error)=>{ setIsLoading(false); setMessageFromBackEnd(error?.response?.data?.message);})
+    };
+
+    function detectPayment (values){
+        return cashOrOnline ? payOnline(values) : payCash(values);
+    }
 
     const formik = useFormik({
         initialValues: {
@@ -42,21 +61,7 @@ function Payment() {
             city: ''
         },
         validationSchema: validator,
-        onSubmit: payOnline
-        // onSubmit: (values)=>{
-        //     setIsLoading(true);
-        //     axios
-        //         .post(`https://ecommerce.routemisr.com/api/v1/orders/${productToCart._id}`,{ shippingAddress : values },{ 
-        //             headers : {token: user?.token} } 
-        //         ).then((response)=>{
-        //             setIsLoading(false);
-        //             if(response.data.status === 'success'){
-        //                 toast.success('products well come soon....');
-        //                 getCartItems();
-        //             };
-        //             console.log(response.data);
-        //         }).catch((error)=>{ setIsLoading(false); setMessageFromBackEnd(error?.response?.data?.message); console.error('payment error:', error?.response?.data?.message);})
-        // }
+        onSubmit: detectPayment
     });
 
     const inputGray = "border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 min-w-0 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500";
@@ -143,9 +148,12 @@ function Payment() {
                                     }
                                 </div>
 
-                                <div className="relative">
-                                    <button className="bg-blue-500 text-white rounded-md px-2 py-1">
-                                        {isLoading ? <>Submiting... <i className='fas fa-spinner fa-spin'></i></> : 'Submit'}
+                                <div className="relative flex justify-between">
+                                    <button onClick={()=>{setCashOrOnline(true)}} className="bg-blue-500 text-white rounded-md px-2 py-1">
+                                        {isLoading ? <>Submiting... <i className='fas fa-spinner fa-spin'></i></> : 'Buy Online'}
+                                    </button>
+                                    <button onClick={()=>{setCashOrOnline(false)}} className="bg-blue-500 text-white rounded-md px-2 py-1">
+                                        {isLoading ? <>Submiting... <i className='fas fa-spinner fa-spin'></i></> : 'Buy Cash'}
                                     </button>
                                 </div>
 
