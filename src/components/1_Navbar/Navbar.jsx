@@ -63,7 +63,7 @@ function Navbar() {
                             <li><NavLink to={'Products'} onClick={() => { handleMenu(); }}>Products</NavLink></li>
                             <li><NavLink onClick={() => { handleMenu(); }}>Brands</NavLink></li>
                             <li><NavLink onClick={() => { handleMenu(); }}>Categories</NavLink></li>
-                            <li><NavLink to={`/Cart`} onClick={() => { handleMenu(); }}>Cart{productToCart?.products?.length}</NavLink></li>
+                            <li className={`${user?.token ? '' : 'hidden'}`}><NavLink to={`/Cart`} onClick={() => { handleMenu(); }} className='border border-red-500'>Cart{productToCart?.products?.length}</NavLink></li>
                         </ul>
                     </div>
                 </div>
