@@ -4,6 +4,9 @@ import { Link, NavLink, useNavigate, useParams } from 'react-router-dom';
 import { dataContext } from '../Context/Context';
 
 function Navbar() {
+    const storedUser = localStorage.getItem('userToken');
+    const user = storedUser ? JSON.parse(storedUser) : null;
+    // console.log(user);
     const [isScroll, setIsScroll] = useState(false);
     const [isToggle, setIsToggle] = useState(false);
     const handleMenu = () => {
@@ -26,10 +29,9 @@ function Navbar() {
     }, []);
 
 
-    const { userLogin, setUserLogin, productToCart } = useContext(dataContext);
+    const { productToCart } = useContext(dataContext);
     const handleLogout = () => {
         localStorage.removeItem('userToken');
-        setUserLogin(null)
     }
 
     return (
@@ -37,12 +39,12 @@ function Navbar() {
             <div className="w-full bg-gradient-to-r from-blue-300 to-blue-600 shadow-lg transform">
                 <div className='container mx-auto px-2 sm:px-12 py-2 flex justify-between'>
                     <Link to={'/'} className='block text-lg font-bold'><span className='flex gap-1 items-center'><i className="fa-solid fa-cart-plus"></i>FreshCart</span></Link>
-                    <h1>{userLogin?.user?.name}</h1>
-                    {!userLogin?.token
+                    <h1>{user?.user?.name}</h1>
+                    {!user?.token
                         ?
                         <ul className='flex gap-5'>
                             <li><NavLink to={'/register'}>Register</NavLink></li>
-                            <li><NavLink to={'/login'}><p className='border items-center align-middle'>Login <span><i className="fa-solid fa-right-to-bracket" /></span></p></NavLink></li>
+                            <li><NavLink to={'/login'}><p className='items-center align-middle'>Login <span><i className="fa-solid fa-right-to-bracket" /></span></p></NavLink></li>
                         </ul>
                         :
                         <button className='' onClick={handleLogout}>LogOut <i className="fa-solid fa-right-from-bracket"></i></button>

@@ -1,22 +1,13 @@
 import React, { createContext, useEffect, useState } from 'react';
-import style from './Context.module.css';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
 export const dataContext = createContext();
 
 function StoreContextProvider({ children }) {
-
-    const [userLogin, setUserLogin] = useState(null);
-
-    useEffect(() => {
-        const token = localStorage.getItem('userToken');
-
-        return () => {
-            setUserLogin(token ? JSON.parse(token) : [])
-        };
-    }, []);
-
+    const storedUser = localStorage.getItem('userToken');
+    const user = storedUser ? JSON.parse(storedUser) : null;
+    // console.log(user);
     const [products, setProducts] = useState(null);
     async function getAllProducts (){
         try {
@@ -32,46 +23,8 @@ function StoreContextProvider({ children }) {
     }, []);
 
     // for add to cart in 5_Cart component
-    const storedUser = localStorage.getItem('userToken');
-    const user = storedUser ? JSON.parse(storedUser) : null;
-    // console.log(user);
     const [productToCart, setSendProductToCart] = useState([]);
     const [numOfCartItems, setNumOfCartItems] = useState(0);
-
-    // const addToCart = async ( product_Id ) => {
-    //     if (!product_Id) {
-    //         console.error("No product selected");
-    //         return;
-    //     };
-
-    //     if (!user?.token) {
-    //         console.error("User is not logged in");
-    //         toast.error("You are not logged in")
-    //         return;
-    //     }
-    //     try {
-    //         const response = await axios.post(
-    //             'https://ecommerce.routemisr.com/api/v1/cart',
-    //             { productId: product_Id },
-    //             { headers: {token: user.token} }
-    //         );
-    //         getCartItems()
-    //         return response;
-    //         // console.log(response.data);
-    //         // console.log(response.data.cartId);
-    //         // console.log(response.data.numOfCartItems);
-    //         // console.log(response.data.data.totalCartPrice);
-    //         // console.log(response.data.data.products);
-    //         // toast.success(response.data.message);
-    //     } catch (error) {
-    //         console.error('add to cart:', error);
-    //         if (error.response?.status === 401) {
-    //             localStorage.removeItem('userToken');
-    //             window.location.href = '/login';
-    //         }
-    //     };
-    // };
-    // for add to cart in 5_Cart component
     
     function addToCart (product_Id) {
         if (!product_Id) {
@@ -104,6 +57,7 @@ function StoreContextProvider({ children }) {
                     return response;
                 }).catch((error)=>{console.error('add cart:', error);});
     };
+    // for add to cart in 5_Cart component
 
     // Update cart product quantity
     async function UpdateCartItem ( product_Id, product_Count ){
@@ -162,7 +116,7 @@ function StoreContextProvider({ children }) {
         }
     },[user?.token])
     return (
-        <dataContext.Provider value={{ products, userLogin, setUserLogin, addToCart, productToCart, getCartItems, UpdateCartItem, deleteCartItem, clearAllCartItem }}>
+        <dataContext.Provider value={{ products, addToCart, productToCart, getCartItems, UpdateCartItem, deleteCartItem, clearAllCartItem }}>
             {children}
         </dataContext.Provider>
     )
