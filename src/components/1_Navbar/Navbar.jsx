@@ -34,6 +34,9 @@ function Navbar() {
         localStorage.removeItem('userToken');
     }
 
+    const navigate = useNavigate();
+    const {products} = useParams();
+
     return (
         <div className={`navbar w-full backdrop-blur-sm fixed top-0 transition-all ease-in-out duration-500 z-50`}>
             <div className="w-full bg-gradient-to-r from-blue-300 to-blue-600 shadow-lg transform">
@@ -54,16 +57,16 @@ function Navbar() {
             <div className={`bg-slate-400/30 flex justify-between align-middle ${isScroll ? 'py-3' : 'py-5'}`}>
                 <div className='container mx-auto px-4 sm:px-12 flex flex-col'>
                     <div className='flex justify-between sm:hidden'>
-                        <h1 className='capitalize'>home</h1>
+                        <h1 className='capitalize'>{products ? products : 'Home'}</h1>
                         <button className='w-fit transition-all ease-in-out duration-500' onClick={handleMenu}>{isToggle ? <i className="text-[24px] fa-solid fa-xmark"></i> : <i className="text-[22px] fa-solid fa-bars"></i>}</button>
                     </div>
                     <div className={`w-full transition-all ease-in-out duration-500 overflow-hidden ${isToggle ? 'h-56 pt-5 sm:h-full sm:pt-0' : 'h-0 sm:h-full'}`}>
                         <ul className='flex flex-col sm:flex-row gap-5'>
-                            <li className='flex'><NavLink to={'/'} onClick={() => { handleMenu(); }} className='w-full border-b border-blue-500 sm:border-none'>Home</NavLink></li>
-                            <li className='flex'><NavLink to={'Products'} onClick={() => { handleMenu(); }} className='w-full border-b border-blue-500 sm:border-none'>Products</NavLink></li>
+                            <li className='flex'><NavLink to={'/'} onClick={() => { handleMenu(); navigate("/") }} className='w-full border-b border-blue-500 sm:border-none'>Home</NavLink></li>
+                            <li className='flex'><NavLink to={'Products'} onClick={() => { handleMenu(); navigate('/products') }} className='w-full border-b border-blue-500 sm:border-none'>Products</NavLink></li>
                             <li className='flex'><NavLink onClick={() => { handleMenu(); }} className='w-full border-b border-blue-500 sm:border-none'>Brands</NavLink></li>
                             <li className='flex'><NavLink onClick={() => { handleMenu(); }} className='w-full border-b border-blue-500 sm:border-none'>Categories</NavLink></li>
-                            <li className={`flex ${user?.token ? '' : 'hidden'}`}><NavLink to={`/Cart`} onClick={() => { handleMenu(); }} className='w-full border-b border-blue-500 sm:border-none'>Cart{productToCart?.products?.length}</NavLink></li>
+                            <li className={`flex ${user?.token ? '' : 'hidden'}`}><NavLink to={`/Cart`} onClick={() => { handleMenu(); navigate('/cart') }} className='w-full border-b border-blue-500 sm:border-none'>Cart{productToCart?.products?.length}</NavLink></li>
                         </ul>
                     </div>
                 </div>

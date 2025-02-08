@@ -21,8 +21,8 @@ function App() {
         { index: true, element: <Home /> },
         { path:'register', element: <Register/>},
         { path:'login', element: <Login/>},
-        { path:'Products', element: <Products/>},
-        { path:'cart', element: <ProtectedRoute><Cart/></ProtectedRoute>},
+        { path:'/:products', element: <Products/>},
+        { path:'/:cart', element: <ProtectedRoute><Cart/></ProtectedRoute>},
         { path:'payment', element: <ProtectedRoute><Payment/></ProtectedRoute>},
         { path:'*', element: <Notfound/>},
       ]
