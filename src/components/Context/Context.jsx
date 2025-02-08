@@ -18,9 +18,7 @@ function StoreContextProvider({ children }) {
             console.error('error all products', error);
         }
     }
-    useEffect(() => {
-        getAllProducts()
-    }, []);
+
 
     // for add to cart in 5_Cart component
     const [productToCart, setSendProductToCart] = useState([]);
@@ -105,18 +103,14 @@ function StoreContextProvider({ children }) {
         try {
             const response = await axios.get('https://ecommerce.routemisr.com/api/v1/cart',{ headers: {token: user.token} })
             setSendProductToCart(response.data.data)
-            console.log(response.data);
+            // console.log(response.data);
         } catch (error) {
             console.error('get cart items:' , error);
         }
     };
-    useEffect(()=>{
-        if(user?.token){
-            getCartItems();
-        }
-    },[user?.token])
+
     return (
-        <dataContext.Provider value={{ products, addToCart, productToCart, getCartItems, UpdateCartItem, deleteCartItem, clearAllCartItem }}>
+        <dataContext.Provider value={{ getAllProducts, getCartItems, products, addToCart, productToCart, getCartItems, UpdateCartItem, deleteCartItem, clearAllCartItem }}>
             {children}
         </dataContext.Provider>
     )

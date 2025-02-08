@@ -27,7 +27,7 @@ function Payment() {
         await axios.post(`https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${productToCart._id}?url=http://localhost:5173`,
             { shippingAddress : values },{ headers : {token: user?.token} } 
             ).then((response)=>{
-                console.log(response.data);
+                // console.log(response.data);
                 if (response.data.status === 'success') {
                     toast.success('products well come soon....');
                     window.open(response.data.session.url)
