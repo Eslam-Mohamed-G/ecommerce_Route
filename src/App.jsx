@@ -12,6 +12,7 @@ import Cart from './components/5_Cart/Cart.jsx';
 import Products from './components/6_products/Products.jsx';
 import Payment from './components/7_payment/Payment.jsx';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.jsx';
+import ProductDetails from './components/8_details/ProductDetails.jsx';
 
 function App() {
   const routes = createBrowserRouter([
@@ -22,6 +23,7 @@ function App() {
         { path:'register', element: <Register/>},
         { path:'login', element: <Login/>},
         { path:'/products', element: <Products/>},
+        { path:'/details', element: <ProductDetails/>},
         { path:'/cart', element: <ProtectedRoute><Cart/></ProtectedRoute>},
         { path:'payment', element: <ProtectedRoute><Payment/></ProtectedRoute>},
         { path:'*', element: <Notfound/>},

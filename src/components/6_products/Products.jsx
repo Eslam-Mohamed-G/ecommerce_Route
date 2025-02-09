@@ -4,16 +4,16 @@ import { Link } from 'react-router-dom';
 import AOS from 'aos';
 
 function Products() {
-    const { products, addToCart, getAllProducts } = useContext(dataContext);
+    const { products, addToCart, getAllProducts, fetchProductsDetails } = useContext(dataContext);
     AOS.init({once: false,});
-    // useEffect(() => {
-    //     getAllProducts()
-    // }, []);
+    useEffect(() => {
+        getAllProducts()
+    }, []);
     return (
         <div className='container mx-auto px-4 sm:px-12 pt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-4'>
             {products?.map((product, index)=>
                 <div data-aos="fade-up" key={index} className="w-full max-w-sm overflow-hidden hover:shadow-xl transition-all bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-                    <Link to={''}>
+                    <Link to={'/details'} onClick={()=>{fetchProductsDetails(product._id)}}>
                         <img className="rounded-t-lg w-full h-48 sm:h-60 mx-auto object-cover" src={product.imageCover} alt="product image" />
                     </Link>
                     <div className="px-5 pb-5">
