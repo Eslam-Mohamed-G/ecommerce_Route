@@ -29,7 +29,7 @@ function Navbar() {
     }, []);
 
 
-    const { productToCart, getAllProducts } = useContext(dataContext);
+    const { productToCart, getAllProducts, getUserWishlist } = useContext(dataContext);
     const handleLogout = () => {
         localStorage.removeItem('userToken');
     }
@@ -64,7 +64,7 @@ function Navbar() {
                             <li className='flex'><NavLink onClick={() => { handleMenu(); }} className='w-full border-b border-blue-500 sm:border-none'>Brands</NavLink></li>
                             <li className='flex'><NavLink onClick={() => { handleMenu(); }} className='w-full border-b border-blue-500 sm:border-none'>Categories</NavLink></li>
                             <li className={`flex ${user?.token ? '' : 'hidden'}`}><NavLink to={`/cart`} onClick={() => { handleMenu(); }} className='w-full border-b border-blue-500 sm:border-none'>Cart{productToCart?.products?.length}</NavLink></li>
-                            <li className={`flex ${user?.token ? '' : 'hidden'}`}><NavLink to={`/wishlist`} onClick={() => { handleMenu(); }} className='w-full border-b border-blue-500 sm:border-none'>Wish List</NavLink></li>
+                            <li className={`flex ${user?.token ? '' : 'hidden'}`}><NavLink to={`/wishlist`} onClick={() => { handleMenu(); getUserWishlist() }} className='w-full border-b border-blue-500 sm:border-none'>Wish List</NavLink></li>
                         </ul>
                     </div>
                 </div>

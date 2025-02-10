@@ -144,24 +144,44 @@ function StoreContextProvider({ children }) {
     // POST Add product to wishlist
 
     // GET logged user wishlist
+    // const [wishList, setWishList] = useState([]);
+    // const getUserWishlist = useCallback( async () =>{
+    //     if (!user?.token) {
+    //         toast.error("You are not logged in")
+    //         return;
+    //     };
+    //     try {
+    //         const response = await axios.get('https://ecommerce.routemisr.com/api/v1/wishlist',{ headers: {token: user.token} });
+    //         setWishList(response.data.data);
+    //         console.log(response.data);
+    //     } catch (error) {
+    //         console.error("get user wish:", error);
+    //     }
+    // });
     const [wishList, setWishList] = useState([]);
-    const getUserWishlist = useCallback( async () =>{
+    async function getUserWishlist(){
         if (!user?.token) {
             toast.error("You are not logged in")
             return;
         };
+        setLoading(true);
+        setErrorMSG("");
         try {
             const response = await axios.get('https://ecommerce.routemisr.com/api/v1/wishlist',{ headers: {token: user.token} });
-            setWishList(response.data.data);
-            console.log(response.data);
+            setWishList([...response.data.data]);
+            // console.log(response.data.data);
         } catch (error) {
             console.error("get user wish:", error);
+            setErrorMSG(error.message)
+        } finally{
+            setLoading(false);
         }
-    });
+    };
     // GET logged user wishlist
 
+
     return (
-        <dataContext.Provider value={{ getAllProducts, getCartItems, products, addToCart, postWishlist, getUserWishlist, productToCart, getCartItems, UpdateCartItem, deleteCartItem, clearAllCartItem, loading, errorMSG }}>
+        <dataContext.Provider value={{ getAllProducts, getCartItems, products, addToCart, postWishlist, getUserWishlist, wishList, productToCart, getCartItems, UpdateCartItem, deleteCartItem, clearAllCartItem, loading, errorMSG }}>
             {children}
         </dataContext.Provider>
     )

@@ -1,35 +1,16 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import axios from 'axios';
+import { dataContext } from '../Context/Context';
+import { useNavigate } from 'react-router-dom';
+import AOS from 'aos';
 
 function WishList() {
-    const storedUser = localStorage.getItem('userToken');
-    const user = storedUser ? JSON.parse(storedUser) : null;
-
-    const [loading, setLoading] = useState(false);
-    const [errorMSG, setErrorMSG] = useState('');
-    const [wishList, setWishList] = useState([]);
-    const getUserWishlist = useCallback( async () =>{
-        if (!user?.token) {
-            toast.error("You are not logged in")
-            return;
-        };
-        setLoading(true);
-        setErrorMSG("");
-        try {
-            const response = await axios.get('https://ecommerce.routemisr.com/api/v1/wishlist',{ headers: {token: user.token} });
-            setWishList(response.data.data);
-            console.log(response.data.data);
-        } catch (error) {
-            console.error("get user wish:", error);
-            setErrorMSG(error.message)
-        } finally{
-            setLoading(false);
-        }
-    });
+    const { addToCart, getUserWishlist, wishList, loading, errorMSG } = useContext(dataContext);
+    const navigate = useNavigate();
+    
     useEffect(() => {
-        if(user?.token){
-            getUserWishlist()
-        }
+        getUserWishlist()
+        AOS.init({once: false,});
     }, []);
     return (
         <div className='container mx-auto px-4 sm:px-12 pt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-4'>
@@ -52,7 +33,7 @@ function WishList() {
                 </div>
             }
             {errorMSG && <p className='text-center capitalize text-red-500 font-sans font-bold text-[34px]'>{errorMSG}</p>}
-            {wishList?.map((product, index)=>
+            { !loading && !errorMSG && wishList?.map((product, index)=>
                 <div data-aos="fade-up" key={index} className="w-full max-w-sm overflow-hidden hover:shadow-xl transition-all bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
                     <div onClick={()=>{navigate(`/${product.title.split(' ').slice(0, 3).join(" ")}/${product._id}`)}}>
                         <img className="rounded-t-lg w-full h-48 sm:h-60 mx-auto object-cover" src={product.imageCover} alt="product image" />
@@ -80,3 +61,30 @@ function WishList() {
 }
 
 export default WishList;
+
+
+
+// const storedUser = localStorage.getItem('userToken');
+    // const user = storedUser ? JSON.parse(storedUser) : null;
+
+    // const [loading, setLoading] = useState(false);
+    // const [errorMSG, setErrorMSG] = useState('');
+    // const [wishList, setWishList] = useState(null);
+    // async function getUserWishlist(){
+    //     if (!user?.token) {
+    //         toast.error("You are not logged in")
+    //         return;
+    //     };
+    //     setLoading(true);
+    //     setErrorMSG("");
+    //     try {
+    //         const response = await axios.get('https://ecommerce.routemisr.com/api/v1/wishlist',{ headers: {token: user.token} });
+    //         setWishList(response.data.data);
+    //         // console.log(response.data.data);
+    //     } catch (error) {
+    //         console.error("get user wish:", error);
+    //         setErrorMSG(error.message)
+    //     } finally{
+    //         setLoading(false);
+    //     }
+    // };
