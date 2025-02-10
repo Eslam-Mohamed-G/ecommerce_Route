@@ -17,10 +17,12 @@ function Products() {
         }
     }, []);
     return (
-        
+        <>
+            <div className='container mx-auto px-4 sm:px-12 pt-4'>
+                {loading && <Loading />}
+                {errorMSG && <p className='text-center capitalize text-red-500 font-sans font-bold text-[34px]'>{errorMSG}</p>}
+            </div>
         <div className='container mx-auto px-4 sm:px-12 pt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-4'>
-            {loading && <Loading/>}
-            {errorMSG && <p className='text-center capitalize text-red-500 font-sans font-bold text-[34px]'>{errorMSG}</p>}
             { !loading && !errorMSG && products?.map((product, index)=>
                 <div data-aos="fade-up" key={index} className="w-full max-w-sm overflow-hidden hover:shadow-xl transition-all bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
                     <div onClick={()=>{navigate(`/${product.title.split(' ').slice(0, 3).join(" ")}/${product._id}`)}}>
@@ -45,6 +47,7 @@ function Products() {
                 </div>
             )}
         </div>
+        </>
     )
 }
 

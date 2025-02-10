@@ -57,7 +57,7 @@ function Navbar() {
                         <h1 className='capitalize'>Home</h1>
                         <button className='w-fit transition-all ease-in-out duration-500' onClick={handleMenu}>{isToggle ? <i className="text-[24px] fa-solid fa-xmark"></i> : <i className="text-[22px] fa-solid fa-bars"></i>}</button>
                     </div>
-                    <div className={`w-full transition-all ease-in-out duration-500 overflow-hidden ${isToggle ? 'h-56 pt-5 sm:h-full sm:pt-0' : 'h-0 sm:h-full'}`}>
+                    <div className={`w-full transition-all ease-in-out duration-500 overflow-hidden ${isToggle ? 'h-72 pt-5 sm:h-full sm:pt-0' : 'h-0 sm:h-full'}`}>
                         <ul className='flex flex-col sm:flex-row gap-5'>
                             <li className='flex'><NavLink to={'/'} onClick={() => { handleMenu(); }} className='w-full border-b border-blue-500 sm:border-none'>Home</NavLink></li>
                             <li className='flex'><NavLink to={'Products'} onClick={() => { handleMenu(); getAllProducts() }} className='w-full border-b border-blue-500 sm:border-none'>Products</NavLink></li>
