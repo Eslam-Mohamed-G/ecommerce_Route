@@ -4,11 +4,16 @@ import { Link, useNavigate } from 'react-router-dom';
 import AOS from 'aos';
 
 function Products() {
-    const { products, addToCart, getAllProducts } = useContext(dataContext);
+    const { products, addToCart, getAllProducts, getUserWishlist } = useContext(dataContext);
     const navigate = useNavigate();
     AOS.init({once: false,});
+    const storedUser = localStorage.getItem('userToken');
+    const user = storedUser ? JSON.parse(storedUser) : null;
     useEffect(() => {
         getAllProducts()
+        if(user?.token){
+            getUserWishlist()
+        }
     }, []);
     return (
         <div className='container mx-auto px-4 sm:px-12 pt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-4'>

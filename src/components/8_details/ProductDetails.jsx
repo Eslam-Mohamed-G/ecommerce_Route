@@ -22,7 +22,7 @@ function ProductDetails() {
             setLoading(false);
         }
     });
-    const { addToCart } = useContext(dataContext);
+    const { addToCart, postWishlist } = useContext(dataContext);
 
     useEffect(() => {
         if(id){
@@ -61,7 +61,7 @@ function ProductDetails() {
                             </figure>
                             <div className='flex flex-wrap justify-between mt-4 md:mt-6'>
                                 <button onClick={() => addToCart(details._id)} className='inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'>add to cart</button>
-                                <button><span className='text-[24px]'><i className="fa-solid fa-heart"></i></span></button>
+                                <button onClick={()=>{postWishlist(details._id)}}><span className='text-[24px]'><i className="fa-solid fa-heart"></i></span></button>
                             </div>
                         </div>
                         <div className='card p-6'>

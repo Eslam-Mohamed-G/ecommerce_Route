@@ -110,8 +110,45 @@ function StoreContextProvider({ children }) {
         }
     };
 
+    // POST Add product to wishlist
+    const postWishlist = useCallback( async (product_Id) => {
+        if (!product_Id) {
+            console.error("No product selected");
+            return;
+        };
+
+        if (!user?.token) {
+            toast.error("You are not logged in")
+            return;
+        };
+        try {
+            const response = await axios.post(
+                'https://ecommerce.routemisr.com/api/v1/wishlist',
+                { productId: product_Id },
+                { headers: { token: user.token } }
+            )
+            console.log(response.data);
+            toast.success('added to your wishlist');
+        } catch (error) {
+            console.error('wishlist:', error);
+            toast.error("already exists");
+        }
+    });
+    // POST Add product to wishlist
+
+    // GET logged user wishlist
+    const getUserWishlist = useCallback( async () =>{
+        try {
+            const response = await axios.get('https://ecommerce.routemisr.com/api/v1/wishlist',{ headers: {token: user.token} });
+            console.log(response.data);
+        } catch (error) {
+            console.error("get user wish:", error);
+        }
+    });
+    // GET logged user wishlist
+
     return (
-        <dataContext.Provider value={{ getAllProducts, getCartItems, products, addToCart, productToCart, getCartItems, UpdateCartItem, deleteCartItem, clearAllCartItem }}>
+        <dataContext.Provider value={{ getAllProducts, getCartItems, products, addToCart, postWishlist, getUserWishlist, productToCart, getCartItems, UpdateCartItem, deleteCartItem, clearAllCartItem }}>
             {children}
         </dataContext.Provider>
     )
