@@ -7,17 +7,23 @@ export const dataContext = createContext();
 
 function StoreContextProvider({ children }) {
     const [loading, setLoading] = useState(false);
+    const [errorMSG, setErrorMSG] = useState('');
     const storedUser = localStorage.getItem('userToken');
     const user = storedUser ? JSON.parse(storedUser) : null;
     // console.log(user);
     const [products, setProducts] = useState(null);
     async function getAllProducts (){
+        setLoading(true);
+        setErrorMSG('');
         try {
             const {data} = await axios.get(`https://ecommerce.routemisr.com/api/v1/products`);
             setProducts(data.data)
             // console.log(data.data);
         } catch (error) {
             console.error('error all products', error);
+            setErrorMSG(error.message);
+        } finally{
+            setLoading(false);
         }
     }
     
@@ -155,7 +161,7 @@ function StoreContextProvider({ children }) {
     // GET logged user wishlist
 
     return (
-        <dataContext.Provider value={{ getAllProducts, getCartItems, products, addToCart, postWishlist, getUserWishlist, productToCart, getCartItems, UpdateCartItem, deleteCartItem, clearAllCartItem }}>
+        <dataContext.Provider value={{ getAllProducts, getCartItems, products, addToCart, postWishlist, getUserWishlist, productToCart, getCartItems, UpdateCartItem, deleteCartItem, clearAllCartItem, loading, errorMSG }}>
             {children}
         </dataContext.Provider>
     )
