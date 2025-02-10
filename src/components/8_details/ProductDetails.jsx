@@ -1,35 +1,62 @@
-import React, { useContext } from 'react';
-import { dataContext } from '../Context/Context';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 function ProductDetails() {
-    const { details, loading } = useContext(dataContext);
+    const {id} = useParams();
+    const [loading, setLoading] = useState(false);
+    const [errorMSG, setErrorMSG] = useState('');
+    const [details, setDetails] = useState([]);
+    const fetchProductsDetails = useCallback( async () => { 
+        setLoading(true);
+        setErrorMSG('');
+        try {
+            const response = await axios.get(`https://ecommerce.routemisr.com/api/v1/products/${id}`);
+            setDetails(response?.data?.data);
+            setLoading(false);
+        } catch (error) {
+            setErrorMSG(error.message);
+        } finally{
+            setLoading(false);
+        }
+    });
 
-    if (loading) {
-        return (
-            <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-500" />
-            </span>
-        );
-    }
+    useEffect(() => {
+        if(id){
+            fetchProductsDetails(); 
+        }
+    }, [id]);
+
     return (
-        <div className='container mx-auto px-4 sm:px-12'>
-            <h1>details</h1>
-            {loading ?
-                <span className="relative flex h-3 w-3">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75" />
-                    <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-500" />
-                </span>
-                :
+        <div className='container mx-auto px-4 sm:px-12 py-8'>
+            {loading &&
+                <div role="status" className="space-y-8 animate-pulse md:space-y-0 md:space-x-8 rtl:space-x-reverse md:flex md:items-center">
+                    <div className="flex items-center justify-center w-full h-48 bg-gray-300 rounded-sm sm:w-96 dark:bg-gray-700">
+                        <svg className="w-10 h-10 text-gray-200 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
+                            <path d="M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z" />
+                        </svg>
+                    </div>
+                    <div className="w-full">
+                        <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4" />
+                        <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[480px] mb-2.5" />
+                        <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5" />
+                        <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[440px] mb-2.5" />
+                        <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[460px] mb-2.5" />
+                        <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]" />
+                    </div>
+                    <span className="sr-only">Loading...</span>
+                </div>
+            }
+            {errorMSG && <p className='text-center capitalize text-red-500 font-sans font-bold text-[34px]'>{errorMSG}</p>}
+            { !loading && !errorMSG &&
                 <div className='card'>
-                    <h1>{details.title}</h1>
-                    <h1>{details.price}</h1>
-                    <img src={details.imageCover} alt="product-image" />
+                    <h1>{details?.title}</h1>
+                    <h1>{details?.price} EGP</h1>
+                    <img src={details?.imageCover} alt="product-image" />
                     {details?.images?.map((img, index) => (
                         <img src={img} alt="img" key={index} />
                     ))}
                     <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-sm dark:bg-blue-200 dark:text-blue-800">{details.ratingsAverage}</span>
-                    {/* <h1>{details.ratingsAverage}</h1> */}
                 </div>
             }
         </div>

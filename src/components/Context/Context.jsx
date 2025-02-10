@@ -20,28 +20,7 @@ function StoreContextProvider({ children }) {
             console.error('error all products', error);
         }
     }
-
-    // Products-details for 8_details component
-    // GET specific Product
-    const [details, setDetails] = useState(()=>{
-        const savedDetails = sessionStorage.getItem('details');
-        return savedDetails ? JSON.parse(savedDetails) : [];
-    });
-    const fetchProductsDetails = useCallback( async (id) => { 
-        setLoading(true);
-        try {
-            const response = await axios.get(`https://ecommerce.routemisr.com/api/v1/products/${id}`);
-            setDetails(response.data.data);
-            sessionStorage.setItem('details', JSON.stringify(response.data.data));
-            console.log(response.data.data);
-            setLoading(false);
-        } catch (error) {
-            setLoading(true);
-        }
-    });
-    // Products-details for 8_details component
     
-
     // for add to cart in 5_Cart component
     const [productToCart, setSendProductToCart] = useState([]);
     const [numOfCartItems, setNumOfCartItems] = useState(0);
@@ -132,7 +111,7 @@ function StoreContextProvider({ children }) {
     };
 
     return (
-        <dataContext.Provider value={{ getAllProducts, fetchProductsDetails, details, getCartItems, products, addToCart, productToCart, getCartItems, UpdateCartItem, deleteCartItem, clearAllCartItem }}>
+        <dataContext.Provider value={{ getAllProducts, getCartItems, products, addToCart, productToCart, getCartItems, UpdateCartItem, deleteCartItem, clearAllCartItem }}>
             {children}
         </dataContext.Provider>
     )

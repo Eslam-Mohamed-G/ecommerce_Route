@@ -23,7 +23,7 @@ function App() {
         { path:'register', element: <Register/>},
         { path:'login', element: <Login/>},
         { path:'/products', element: <Products/>},
-        { path:'/details', element: <ProductDetails/>},
+        { path:'/:details/:id', element: <ProductDetails/>},
         { path:'/cart', element: <ProtectedRoute><Cart/></ProtectedRoute>},
         { path:'payment', element: <ProtectedRoute><Payment/></ProtectedRoute>},
         { path:'*', element: <Notfound/>},
