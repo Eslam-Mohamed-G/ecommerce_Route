@@ -116,6 +116,12 @@ function StoreContextProvider({ children }) {
         }
     };
 
+    useEffect(()=>{
+        if(user?.token){
+            getCartItems();
+        }
+    },[user?.token])
+
     // POST Add product to wishlist
     const postWishlist = useCallback( async (product_Id) => {
         if (!product_Id) {

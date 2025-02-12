@@ -10,12 +10,6 @@ function Cart() {
     const { productToCart, UpdateCartItem, deleteCartItem, clearAllCartItem, getCartItems } = useContext(dataContext);
     AOS.init({once: false,});
     // console.log(productToCart);
-
-    useEffect(()=>{
-        if(user?.token){
-            getCartItems();
-        }
-    },[user?.token])
     return (
         <div className="container mx-auto px-3 sm:px-8 pt-8">
             {productToCart?.products?.length < 1 ? (
