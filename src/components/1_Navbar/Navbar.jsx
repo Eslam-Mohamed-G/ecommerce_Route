@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from 'react';
-import style from './Navbar.module.css';
 import { Link, NavLink, useNavigate, useParams } from 'react-router-dom';
 import { dataContext } from '../Context/Context';
 
@@ -9,6 +8,7 @@ function Navbar() {
     // console.log(user);
     const [isScroll, setIsScroll] = useState(false);
     const [isToggle, setIsToggle] = useState(false);
+    const [menuName, setMenuName] = useState("Home");
     const handleMenu = () => {
         setIsToggle(!isToggle);
     };
@@ -54,17 +54,17 @@ function Navbar() {
             <div className={`bg-slate-400/30 flex justify-between align-middle ${isScroll ? 'py-3' : 'py-5'}`}>
                 <div className='container mx-auto px-4 sm:px-12 flex flex-col'>
                     <div className='flex justify-between sm:hidden'>
-                        <h1 className='capitalize'>Home</h1>
+                        <h1 className='capitalize'>{menuName}</h1>
                         <button className='w-fit transition-all ease-in-out duration-500' onClick={handleMenu}>{isToggle ? <i className="text-[24px] fa-solid fa-xmark"></i> : <i className="text-[22px] fa-solid fa-bars"></i>}</button>
                     </div>
                     <div className={`w-full transition-all ease-in-out duration-500 overflow-hidden ${isToggle ? 'h-72 pt-5 sm:h-full sm:pt-0' : 'h-0 sm:h-full'}`}>
                         <ul className='flex flex-col sm:flex-row gap-5'>
                             <li className='flex'><NavLink to={'/'} onClick={() => { handleMenu(); }} className='w-full border-b border-blue-500 sm:border-none'>Home</NavLink></li>
-                            <li className='flex'><NavLink to={'Products'} onClick={() => { handleMenu(); getAllProducts() }} className='w-full border-b border-blue-500 sm:border-none'>Products</NavLink></li>
-                            <li className='flex'><NavLink onClick={() => { handleMenu(); }} className='w-full border-b border-blue-500 sm:border-none'>Brands</NavLink></li>
-                            <li className='flex'><NavLink onClick={() => { handleMenu(); }} className='w-full border-b border-blue-500 sm:border-none'>Categories</NavLink></li>
-                            <li className={`flex ${user?.token ? '' : 'hidden'}`}><NavLink to={`/cart`} onClick={() => { handleMenu(); }} className='w-full border-b border-blue-500 sm:border-none'>Cart{productToCart?.products?.length}</NavLink></li>
-                            <li className={`flex ${user?.token ? '' : 'hidden'}`}><NavLink to={`/wishlist`} onClick={() => { handleMenu(); getUserWishlist() }} className='w-full border-b border-blue-500 sm:border-none'>Wish List</NavLink></li>
+                            <li className='flex'><NavLink to={'Products'} onClick={() => { handleMenu(); getAllProducts(); setMenuName("Products") }} className='w-full border-b border-blue-500 sm:border-none'>Products</NavLink></li>
+                            <li className='flex'><NavLink onClick={() => { handleMenu(); setMenuName("Brands") }} className='w-full border-b border-blue-500 sm:border-none'>Brands</NavLink></li>
+                            <li className='flex'><NavLink onClick={() => { handleMenu(); setMenuName("Categories") }} className='w-full border-b border-blue-500 sm:border-none'>Categories</NavLink></li>
+                            <li className={`flex ${user?.token ? '' : 'hidden'}`}><NavLink to={`/cart`} onClick={() => { handleMenu(); setMenuName("Cart") }} className='w-full border-b border-blue-500 sm:border-none'>Cart{productToCart?.products?.length}</NavLink></li>
+                            <li className={`flex ${user?.token ? '' : 'hidden'}`}><NavLink to={`/wishlist`} onClick={() => { handleMenu(); getUserWishlist(); setMenuName("Wish List") }} className='w-full border-b border-blue-500 sm:border-none'>Wish List</NavLink></li>
                         </ul>
                     </div>
                 </div>
