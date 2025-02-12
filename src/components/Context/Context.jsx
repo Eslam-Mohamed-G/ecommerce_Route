@@ -171,9 +171,26 @@ function StoreContextProvider({ children }) {
     };
     // GET logged user wishlist
 
+    // Get All Brands
+    const [brands, setBrands] = useState([]);
+    async function getBrands () {
+        setLoading(true);
+        setErrorMSG('');
+        try {
+            const response = await axios.get('https://ecommerce.routemisr.com/api/v1/brands?limit=40');
+            setBrands(response.data.data)
+        } catch (error) {
+            setErrorMSG(error.message);
+            toast.error("no data");
+        } finally {
+            setLoading(false);
+        }
+    }
+    // Get All Brands
+
 
     return (
-        <dataContext.Provider value={{ getAllProducts, getCartItems, products, addToCart, postWishlist, getUserWishlist, wishList, productToCart, getCartItems, UpdateCartItem, deleteCartItem, clearAllCartItem, loading, errorMSG }}>
+        <dataContext.Provider value={{ getAllProducts, getCartItems, products, addToCart, postWishlist, getUserWishlist, wishList, productToCart, getCartItems, UpdateCartItem, deleteCartItem, clearAllCartItem, getBrands, brands, loading, errorMSG }}>
             {children}
         </dataContext.Provider>
     )

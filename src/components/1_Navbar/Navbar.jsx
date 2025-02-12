@@ -61,7 +61,7 @@ function Navbar() {
                         <ul className='flex flex-col sm:flex-row gap-5'>
                             <li className='flex'><NavLink to={'/'} onClick={() => { handleMenu(); }} className='w-full border-b border-blue-500 sm:border-none'>Home</NavLink></li>
                             <li className='flex'><NavLink to={'Products'} onClick={() => { handleMenu(); getAllProducts(); setMenuName("Products") }} className='w-full border-b border-blue-500 sm:border-none'>Products</NavLink></li>
-                            <li className='flex'><NavLink onClick={() => { handleMenu(); setMenuName("Brands") }} className='w-full border-b border-blue-500 sm:border-none'>Brands</NavLink></li>
+                            <li className='flex'><NavLink to={'brands'} onClick={() => { handleMenu(); setMenuName("Brands") }} className='w-full border-b border-blue-500 sm:border-none'>Brands</NavLink></li>
                             <li className='flex'><NavLink onClick={() => { handleMenu(); setMenuName("Categories") }} className='w-full border-b border-blue-500 sm:border-none'>Categories</NavLink></li>
                             <li className={`flex ${user?.token ? '' : 'hidden'}`}><NavLink to={`/cart`} onClick={() => { handleMenu(); setMenuName("Cart") }} className='w-full border-b border-blue-500 sm:border-none'>Cart{productToCart?.products?.length}</NavLink></li>
                             <li className={`flex ${user?.token ? '' : 'hidden'}`}><NavLink to={`/wishlist`} onClick={() => { handleMenu(); getUserWishlist(); setMenuName("Wish List") }} className='w-full border-b border-blue-500 sm:border-none'>Wish List</NavLink></li>
