@@ -187,10 +187,23 @@ function StoreContextProvider({ children }) {
         }
     }
     // Get All Brands
+    // Get specific brand
+    const [specificBrands, setSpecificBrands] = useState([]);
+    async function getSpecificBrand (id) {
+        setErrorMSG('');
+        try {
+            const response = await axios.get(`https://ecommerce.routemisr.com/api/v1/brands/${id}`);
+            setSpecificBrands(response.data.data)
+        } catch (error) {
+            setErrorMSG(error.message);
+            toast.error("no data");
+        }
+    };
+    // Get specific brand
 
 
     return (
-        <dataContext.Provider value={{ getAllProducts, getCartItems, products, addToCart, postWishlist, getUserWishlist, wishList, productToCart, getCartItems, UpdateCartItem, deleteCartItem, clearAllCartItem, getBrands, brands, loading, errorMSG }}>
+        <dataContext.Provider value={{ getAllProducts, getCartItems, products, addToCart, postWishlist, getUserWishlist, wishList, productToCart, getCartItems, UpdateCartItem, deleteCartItem, clearAllCartItem, getBrands, brands, specificBrands, getSpecificBrand, loading, errorMSG }}>
             {children}
         </dataContext.Provider>
     )
