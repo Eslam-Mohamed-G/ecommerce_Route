@@ -13,6 +13,18 @@ function Navbar() {
         setIsToggle(!isToggle);
     };
 
+    const [mode, setMode] = useState(false);
+    const handleMode = () =>{
+        setMode(!mode);
+    };
+    useEffect(() => {
+        if(mode){
+            document.querySelector("html").classList.add("dark")
+        }else {
+            document.querySelector("html").classList.remove("dark")
+        }
+    }, [mode]);
+
     useEffect(() => {
         const handleScroll = () => {
             if (window.scrollY > 10) {
@@ -49,6 +61,7 @@ function Navbar() {
                         :
                         <button className='' onClick={handleLogout}>LogOut <i className="fa-solid fa-right-from-bracket"></i></button>
                     }
+                    <button onClick={()=>{handleMode();}} className=''>{mode ? <i className="fa-solid fa-moon"></i> : <i className="fa-solid fa-sun"></i>}</button>
                 </div>
             </div>
             <div className={`bg-slate-400/30 flex justify-between align-middle ${isScroll ? 'py-3' : 'py-5'}`}>
