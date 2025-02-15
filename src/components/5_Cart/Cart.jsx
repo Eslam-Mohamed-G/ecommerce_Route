@@ -11,14 +11,14 @@ function Cart() {
     AOS.init({once: false,});
     // console.log(productToCart);
     return (
-        <div className="container mx-auto px-3 sm:px-8 pt-8">
+        <div className="container mx-auto px-3 sm:px-8 pt-8 dark:text-white">
             {productToCart?.products?.length < 1 ? (
-                <p className='lg:px-36 text-center'>Your cart is empty.</p>
+                <p className='lg:px-36 text-center dark:text-white'>Your cart is empty.</p>
             ) : (
                 <div className="relative lg:px-36">
                     <h1 className="sm:text-2xl capitalize font-bold mb-4 lg:px-36 flex justify-between"><span data-aos="fade-right">your cart</span> <span data-aos="fade-left" className='bg-gradient-to-r from-blue-300 to-blue-600 bg-clip-text text-transparent'>total price: {productToCart.totalCartPrice}</span></h1>
                     {productToCart?.products?.map((product, index) => (
-                        <div data-aos="fade-up" key={index} className="flex flex-col justify-between items-center mb-3 p-1 sm:p-4 border overflow-x-auto shadow-md rounded-lg">
+                        <div data-aos="fade-up" key={index} className="flex flex-col justify-between items-center mb-3 p-1 sm:p-4 border overflow-x-auto shadow-md rounded-lg dark:bg-gray-800 dark:border-gray-700">
 
                             <div className="flex justify-between items-center p-1 w-full">
                                 <p>{product.product.title.split(' ').slice(0, 3).join(' ')}</p>

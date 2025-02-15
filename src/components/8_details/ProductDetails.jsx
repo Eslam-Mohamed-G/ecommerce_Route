@@ -38,7 +38,7 @@ function ProductDetails() {
             
             {!loading && !errorMSG && (
                 <>
-                    <div className='row flex flex-wrap justify-center sm:justify-start m-auto'>
+                    <div className='row flex flex-wrap justify-center sm:justify-start m-auto dark:text-white'>
                         <div className='card w-full sm:w-1/2 max-w-sm overflow-hidden bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700'>
                             <figure className='w-72 h-72 sm:w-96 sm:h-96 mx-auto rounded-t-lg overflow-hidden'>
                                 <img src={details?.imageCover} alt="product-image" className='w-full' />
