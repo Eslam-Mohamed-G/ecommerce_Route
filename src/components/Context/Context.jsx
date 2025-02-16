@@ -200,10 +200,27 @@ function StoreContextProvider({ children }) {
         }
     };
     // Get specific brand
+    
+    // Get All Categories
+    const [categories, setCategories] = useState([]);
+    async function getAllCategories() {
+        setLoading(true);
+        setErrorMSG('');
+        try {
+            const response = await axios.get(`https://ecommerce.routemisr.com/api/v1/categories`);
+            setCategories(response.data.data)
+        } catch (error) {
+            setErrorMSG(error.message);
+            toast.error("no data");
+        } finally{
+            setLoading(false);
+        }
+    }
+    // Get All Categories
 
 
     return (
-        <dataContext.Provider value={{ getAllProducts, getCartItems, products, addToCart, postWishlist, getUserWishlist, wishList, productToCart, getCartItems, UpdateCartItem, deleteCartItem, clearAllCartItem, getBrands, brands, specificBrands, getSpecificBrand, loading, errorMSG }}>
+        <dataContext.Provider value={{ getAllProducts, categories, getAllCategories, getCartItems, products, addToCart, postWishlist, getUserWishlist, wishList, productToCart, getCartItems, UpdateCartItem, deleteCartItem, clearAllCartItem, getBrands, brands, specificBrands, getSpecificBrand, loading, errorMSG }}>
             {children}
         </dataContext.Provider>
     )

@@ -15,6 +15,7 @@ import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.jsx';
 import ProductDetails from './components/8_details/ProductDetails.jsx';
 import WishList from './components/9_wishlist/WishList.jsx';
 import Brands from './components/10_Brands/Brands.jsx';
+import Category from './components/11_category/Category.jsx';
 
 function App() {
   const routes = createBrowserRouter([
@@ -26,6 +27,7 @@ function App() {
         { path:'login', element: <Login/>},
         { path:'/products', element: <Products/>},
         { path:'/brands', element: <Brands/>},
+        { path:'/category', element: <Category/>},
         { path:'/:details/:id', element: <ProductDetails/>},
         { path:'/cart', element: <ProtectedRoute><Cart/></ProtectedRoute>},
         { path:'/wishlist', element: <ProtectedRoute><WishList/></ProtectedRoute>},
