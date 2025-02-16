@@ -51,7 +51,7 @@ function ProductDetails() {
                         <div className='card sm:w-1/2 pt-6 sm:p-4'>
                             <h1 className='text-lg font-bold'>{details?.title}</h1>
                             <div className="flex items-center gap-10 mt-2.5 mb-5">
-                                <h2 className='flex gap-4'> <p className={`relative ${details?.priceAfterDiscount ? 'after:w-full after:h-[2px] after:bg-red-400 after:absolute after:start-0 after:top-1/2' : ''}`}>{details?.price} EGP</p> <p>{details?.priceAfterDiscount ? `${details?.priceAfterDiscount} EGP` : ""}</p></h2>
+                                <h2 className='flex gap-4'> <p className={`relative ${details?.priceAfterDiscount ? 'line-through decoration-red-500 decoration-2' : ''}`}>{details?.price} EGP</p> <p>{details?.priceAfterDiscount ? `${details?.priceAfterDiscount} EGP` : ""}</p></h2>
                                 <div className="flex items-center space-x-1 rtl:space-x-reverse">
                                     <div className="text-yellow-400">★★★★ <span className="text-gray-300">★</span></div>
                                     <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-sm dark:bg-blue-200 dark:text-blue-800 ms-3">{details.ratingsAverage}</span>
