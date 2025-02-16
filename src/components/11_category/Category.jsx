@@ -18,7 +18,7 @@ function Category() {
                     <h1 className='ps-2 pb-2'>shop Popular Categories</h1>
                     <div className='flex flex-row flex-wrap w-full'>
                         {categories?.map((element) => (
-                            <div key={element._id} className='w-1/2 sm:w-1/3 p-2 '>
+                            <div key={element._id} className='w-1/2 sm:w-1/4 p-2 '>
                                 <div className='border border-blue-500 rounded overflow-hidden flex flex-col'>
                                     <div className='relative'>
                                         <img src={element.image} alt={element.name} className='block w-full h-36 sm:h-72 object-cover' />
