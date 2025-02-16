@@ -13,18 +13,22 @@ function Navbar() {
         setIsToggle(!isToggle);
     };
 
-    const [mode, setMode] = useState(false);
-    const handleMode = () =>{
-        setMode(!mode);
+    const [mode, setMode] = useState(() => {
+        return localStorage.getItem("theme") === "dark";
+    });
+    
+    const handleMode = () => {
+        setMode(prevMode => {
+            const newMode = !prevMode;
+            localStorage.setItem("theme", newMode ? "dark" : "light");
+            return newMode;
+        });
     };
+    
     useEffect(() => {
-        if(mode){
-            document.querySelector("html").classList.add("dark")
-        }else {
-            document.querySelector("html").classList.remove("dark")
-        }
+        document.querySelector("html").classList.toggle("dark", mode);
     }, [mode]);
-
+    
     useEffect(() => {
         const handleScroll = () => {
             if (window.scrollY > 10) {
@@ -52,6 +56,7 @@ function Navbar() {
                 <div className='container mx-auto px-2 sm:px-12 py-2 flex justify-between'>
                     <Link to={'/'} className='block text-lg font-bold'><span className='flex gap-1 items-center'><i className="fa-solid fa-cart-plus"></i>FreshCart</span></Link>
                     <h1>{user?.user?.name}</h1>
+                    <div className='flex justify-center items-center gap-4'>
                     {!user?.token
                         ?
                         <ul className='flex gap-5'>
@@ -62,6 +67,7 @@ function Navbar() {
                         <button className='' onClick={handleLogout}>LogOut <i className="fa-solid fa-right-from-bracket"></i></button>
                     }
                     <button onClick={()=>{handleMode();}} className=''>{mode ? <i className="fa-solid fa-moon"></i> : <i className="fa-solid fa-sun"></i>}</button>
+                    </div>
                 </div>
             </div>
             <div className={`bg-slate-400/30 flex justify-between align-middle ${isScroll ? 'py-3' : 'py-5'}`}>
