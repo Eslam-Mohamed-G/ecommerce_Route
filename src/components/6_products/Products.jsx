@@ -5,7 +5,7 @@ import AOS from 'aos';
 import Loading from '../loading/Loading';
 
 function Products() {
-    const { products, addToCart, getAllProducts, getUserWishlist, loading, errorMSG } = useContext(dataContext);
+    const { products, addToCart, getAllProducts, postWishlist, getUserWishlist, loading, errorMSG } = useContext(dataContext);
     const navigate = useNavigate();
     AOS.init({once: false,});
     const storedUser = localStorage.getItem('userToken');
@@ -32,12 +32,12 @@ function Products() {
                         <div onClick={()=>{navigate(`/${product.title.split(' ').slice(0, 3).join(" ")}/${product._id}`)}}>
                             <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{product.title.split(' ').slice(0, 3).join(" ")}</h5>
                         </div>
-                        <div className="flex items-center mt-2.5 mb-5">
+                        <div className="flex items-center justify-between mt-2.5 mb-5">
                             <div className="flex items-center space-x-1 rtl:space-x-reverse">
-                                <div className="text-yellow-400">★★★★</div>
-                                <div className="text-gray-300">★</div>
+                                <div className="text-yellow-400">★★★ <span className="text-gray-300">★</span></div>
+                                <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-sm dark:bg-blue-200 dark:text-blue-800 ms-3">{product.ratingsAverage}</span>
                             </div>
-                            <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-sm dark:bg-blue-200 dark:text-blue-800 ms-3">{product.ratingsAverage}</span>
+                            <button onClick={()=>{postWishlist(product._id)}}><span className='text-[24px]'><i className="fa-solid fa-heart"></i></span></button>
                         </div>
                         <div className="flex items-center justify-between">
                             <span className="text-2xl md:text-xl font-bold text-gray-900 dark:text-white">${product.price}</span>
