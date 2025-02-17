@@ -171,6 +171,28 @@ function StoreContextProvider({ children }) {
     };
     // GET logged user wishlist
 
+    // Remove product from wishlist
+    async function removeWishlist (product_Id) {
+        if (!product_Id) {
+            return;
+        };
+        if (!user?.token) {
+            toast.error("You are not logged in")
+            return;
+        };
+        try {
+            const response = await axios.delete(
+                `https://ecommerce.routemisr.com/api/v1/wishlist/${product_Id}`,
+                { headers: { token: user.token } }
+            )
+            toast.success('removed successfully');
+            getUserWishlist();
+        } catch (error) {
+            toast.error("error")
+        }
+    };
+    // Remove product from wishlist
+
     // Get All Brands
     const [brands, setBrands] = useState([]);
     async function getBrands () {
@@ -220,7 +242,7 @@ function StoreContextProvider({ children }) {
 
 
     return (
-        <dataContext.Provider value={{ getAllProducts, categories, getAllCategories, getCartItems, products, addToCart, postWishlist, getUserWishlist, wishList, productToCart, getCartItems, UpdateCartItem, deleteCartItem, clearAllCartItem, getBrands, brands, specificBrands, getSpecificBrand, loading, errorMSG }}>
+        <dataContext.Provider value={{ getAllProducts, categories, getAllCategories, getCartItems, products, addToCart, postWishlist, getUserWishlist, removeWishlist, wishList, productToCart, getCartItems, UpdateCartItem, deleteCartItem, clearAllCartItem, getBrands, brands, specificBrands, getSpecificBrand, loading, errorMSG }}>
             {children}
         </dataContext.Provider>
     )
