@@ -31,13 +31,13 @@ function WishList() {
                             </div>
                             <div className="flex items-center justify-between mt-2.5 mb-5">
                                 <div>
-                                <div className="flex items-center space-x-1 rtl:space-x-reverse">
-                                    <div className="text-yellow-400">★★★</div>
-                                    <div className="text-gray-300">★</div>
+                                    <div className="flex items-center space-x-1 rtl:space-x-reverse">
+                                        <div className="text-yellow-400">★★★</div>
+                                        <div className="text-gray-300">★</div>
+                                    </div>
+                                    <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-sm dark:bg-blue-200 dark:text-blue-800 ms-3">{product.ratingsAverage}</span>
                                 </div>
-                                <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-sm dark:bg-blue-200 dark:text-blue-800 ms-3">{product.ratingsAverage}</span>
-                                </div>
-                                <button onClick={()=>{removeWishlist(product._id);}} className='flex gap-1 items-center text-red-500 uppercase text-[12px]'><i className="fa-solid fa-trash"></i>remove</button>
+                                <button onClick={() => { removeWishlist(product._id); }} className='flex gap-1 items-center text-red-500 uppercase text-[12px]'><i className="fa-solid fa-trash"></i>remove</button>
                             </div>
                             <div className="flex items-center justify-between">
                                 <span className="text-2xl md:text-xl font-bold text-gray-900 dark:text-white">${product.price}</span>
