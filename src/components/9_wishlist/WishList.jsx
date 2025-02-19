@@ -19,6 +19,8 @@ function WishList() {
                 {loading && <Loading />}
                 {errorMSG && <p className='text-center capitalize text-red-500 font-sans font-bold text-[34px]'>{errorMSG}</p>}
             </div>
+            { wishList?.length< 1 ?<p className='w-full sm:text-2xl capitalize font-bold mb-4 lg:px-36 text-center dark:text-white'>Your cart is empty.</p>
+            :
             <div className='container mx-auto px-4 sm:px-12 pt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-4'>
                 {!loading && !errorMSG && wishList?.map((product, index) =>
                     <div data-aos="fade-up" key={index} className="w-full max-w-sm overflow-hidden hover:shadow-xl transition-all bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
@@ -47,6 +49,7 @@ function WishList() {
                     </div>
                 )}
             </div>
+            }
         </>
     )
 }
