@@ -140,11 +140,13 @@ function StoreContextProvider({ children }) {
                 { productId: product_Id },
                 { headers: { token: user.token } }
             )
-            console.log(response.data);
+            // console.log(response.data);
             toast.success('added to your wishlist');
         } catch (error) {
             console.error('wishlist:', error);
             toast.error("already exists");
+        } finally{
+            getUserWishlist()
         }
     });
     // POST Add product to wishlist

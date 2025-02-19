@@ -5,16 +5,17 @@ import AOS from 'aos';
 import Loading from '../loading/Loading';
 
 function Products() {
-    const { products, addToCart, getAllProducts, postWishlist, getUserWishlist, loading, errorMSG } = useContext(dataContext);
+    const { products, addToCart, getAllProducts, postWishlist, getUserWishlist, wishList, loading, errorMSG } = useContext(dataContext);
     const navigate = useNavigate();
     AOS.init({once: false,});
     const storedUser = localStorage.getItem('userToken');
     const user = storedUser ? JSON.parse(storedUser) : null;
+    
     useEffect(() => {
         getAllProducts()
-        if(user?.token){
-            getUserWishlist()
-        }
+        // if(user?.token){
+        //     getUserWishlist()
+        // }
     }, []);
     return (
         <>
@@ -40,7 +41,7 @@ function Products() {
                                 <div className="text-yellow-400">★★★ <span className="text-gray-300">★</span></div>
                                 <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-sm dark:bg-blue-200 dark:text-blue-800 ms-3">{product.ratingsAverage}</span>
                             </div>
-                            <button onClick={()=>{postWishlist(product._id)}}><span className='text-[24px]'><i className="fa-solid fa-heart"></i></span></button>
+                            <button onClick={()=>{postWishlist(product._id);}}><span className={`text-[24px] ${wishList.some(item => item._id === product._id) ? 'text-red-500' : 'text-gray-400'}`}><i className="fa-solid fa-heart"></i></span></button>
                         </div>
                         <div className="flex items-center justify-between">
                             <span className="text-2xl md:text-xl font-bold text-gray-900 dark:text-white">${product.price}</span>
