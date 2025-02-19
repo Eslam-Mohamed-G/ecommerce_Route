@@ -30,7 +30,7 @@ function WishList() {
                                 <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{product.title.split(' ').slice(0, 3).join(" ")}</h5>
                             </div>
                             <div className="flex items-center justify-between mt-2.5 mb-5">
-                                <div>
+                                <div className='flex flex-grow'>
                                     <div className="flex items-center space-x-1 rtl:space-x-reverse">
                                         <div className="text-yellow-400">★★★</div>
                                         <div className="text-gray-300">★</div>
