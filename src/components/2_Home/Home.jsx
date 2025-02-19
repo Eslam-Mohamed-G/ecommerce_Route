@@ -37,11 +37,11 @@ function Home() {
             <div className="container mx-auto px-4 sm:px-8">
                 {products ? <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-6'>
                     {products?.map((element) => (
-                        <div className="max-w-sm w-full bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all" key={element._id}>
+                        <div className="max-w-sm w-full bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all group" key={element._id}>
                             <div className="relative overflow-hidden">
                                 <img src={element.imageCover} alt="Product" className="w-full object-contain" />
                                 {/* <img src={element.images[0]} alt="Product" className="w-full object-contain" /> */}
-                                <span className="absolute top-3 right-3 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                                <span className={`${element.priceAfterDiscount ? '' : 'hidden'} absolute top-3 right-3 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium`}>
                                     Sale
                                 </span>
                             </div>
@@ -50,10 +50,9 @@ function Home() {
                                     <h3 className="text-xl font-bold text-gray-900">{element.title.split(' ').slice(0, 2).join()}</h3>
                                     <p className="text-gray-500 mt-1">{element.description.substring(0, 40)}...</p>
                                 </div>
-                                <div className="flex justify-between items-center">
+                                <div className="flex justify-between items-center py-3 group-hover:hidden transition-all ease-in-out">
                                     <div className="space-y-1">
                                         <p className="text-2xl font-bold text-gray-900">${element.price}</p>
-                                        <p className="text-sm text-gray-500 line-through">$69.99</p>
                                     </div>
                                     <div className="flex items-center gap-1">
                                         <div className="text-yellow-400">★★★★</div>
@@ -61,7 +60,7 @@ function Home() {
                                         <span className="text-sm text-gray-600 ml-1">({element.ratingsAverage})</span>
                                     </div>
                                 </div>
-                                <button onClick={() => addToCart(element._id)} className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 rounded-lg transition-colors">
+                                <button onClick={() => addToCart(element._id)} className="hidden group-hover:block w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 rounded-lg transition-all ease-in-out delay-150">
                                     Add to Cart
                                 </button>
                             </div>
