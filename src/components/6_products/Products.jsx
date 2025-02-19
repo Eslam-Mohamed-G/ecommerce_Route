@@ -26,7 +26,10 @@ function Products() {
             { !loading && !errorMSG && products?.map((product, index)=>
                 <div data-aos="fade-up" key={index} className="w-full max-w-sm overflow-hidden hover:shadow-xl transition-all bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
                     <div onClick={()=>{navigate(`/${product.title.split(' ').slice(0, 3).join(" ")}/${product._id}`)}}>
-                        <img className="rounded-t-lg w-full h-48 sm:h-60 mx-auto object-cover" src={product.imageCover} alt="product image" />
+                        <img className="rounded-t-lg w-full h-48 sm:h-60 mx-auto object-cover relative" src={product.imageCover} alt="product image" />
+                        <span className={`${product.priceAfterDiscount ? '' : 'hidden'} absolute top-3 right-3 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium`}>
+                            Sale
+                        </span>
                     </div>
                     <div className="px-5 pb-5">
                         <div onClick={()=>{navigate(`/${product.title.split(' ').slice(0, 3).join(" ")}/${product._id}`)}}>
