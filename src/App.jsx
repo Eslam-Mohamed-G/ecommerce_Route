@@ -16,6 +16,9 @@ import ProductDetails from './components/8_details/ProductDetails.jsx';
 import WishList from './components/9_wishlist/WishList.jsx';
 import Brands from './components/10_Brands/Brands.jsx';
 import Category from './components/11_category/Category.jsx';
+import ForgetPassword from './components/4_Login/ForgetPassword.jsx';
+import RestCode from './components/4_Login/RestCode.jsx';
+import RestPassword from './components/4_Login/RestPassword.jsx';
 
 function App() {
   const routes = createBrowserRouter([
@@ -25,6 +28,9 @@ function App() {
         { index: true, element: <Home /> },
         { path:'register', element: <Register/>},
         { path:'login', element: <Login/>},
+        { path:'forgetpassword', element: <ForgetPassword/>},
+        { path:'restpassword', element: <RestPassword/>},
+        { path:'restcode', element: <RestCode/>},
         { path:'/products', element: <Products/>},
         { path:'/brands', element: <Brands/>},
         { path:'/category', element: <Category/>},

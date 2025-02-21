@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Google_logo from '../../assets/Google_logo.webp'
-import style from './Login.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -128,7 +127,7 @@ function Login() {
                                 {/* Forgot password */}
                                 <div className="relative">
                                     <div className="text-right mt-2">
-                                        <Link to={''} className="text-sm font-semibold text-gray-700 hover:text-blue-700 focus:text-blue-700">Forgot Password?</Link>
+                                        <Link to={'/forgetpassword'} className="text-sm font-semibold text-gray-700 hover:text-blue-700 focus:text-blue-700">Forgot Password?</Link>
                                     </div>
                                 </div>
 
