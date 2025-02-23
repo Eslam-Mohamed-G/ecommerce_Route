@@ -1,7 +1,7 @@
 # Ecommerce Project
 
 This project is an Ecommerce application that allows users to browse products, add them to the cart, and complete purchases easily. The project focuses on a smooth user experience and high performance.
-# [live demo](https://recipe-pi-seven.vercel.app/).
+# [live demo](https://ecommerce-route-virid.vercel.app/).
 
 ![Add Product Preview](./public/preview-1.png)
 ![Add Product Preview](./public/preview-2.png)
