@@ -53,4 +53,4 @@ This project is an Ecommerce application that allows users to browse products, a
    6. react-router-dom: For managing routing between pages.
    7. Tailwind CSS: For fast and efficient styling
    8. Formik: For Getting values in and out of form state
-   9. Formik: Yup is a schema builder for runtime value parsing and validation
+   9. Yup: Yup is a schema builder for runtime value parsing and validation
