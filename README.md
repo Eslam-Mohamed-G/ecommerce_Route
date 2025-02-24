@@ -27,6 +27,8 @@ This project is an Ecommerce application that allows users to browse products, a
 - [Sass](https://sass-lang.com/)
 - [Aos](https://michalsnik.github.io/aos/)
 - [Tailwind CSS](https://tailwindcss.com/)
+- [Formik](https://formik.org/docs/overview)
+- [yup](https://www.npmjs.com/package/yup)
 
 ## How to Run
 
@@ -49,4 +51,6 @@ This project is an Ecommerce application that allows users to browse products, a
    4. AOS animations: For animation.
    5. Vite + react: For building the user interface.
    6. react-router-dom: For managing routing between pages.
-   6. Tailwind CSS: For fast and efficient styling
+   7. Tailwind CSS: For fast and efficient styling
+   8. Formik: For Getting values in and out of form state
+   9. Formik: Yup is a schema builder for runtime value parsing and validation
