@@ -24,7 +24,7 @@ function Payment() {
     });
 
     async function payOnline( values ){
-        await axios.post(`https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${productToCart._id}?url=http://localhost:5173`,
+        await axios.post(`https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${productToCart._id}?url=https://ecommerce-route-virid.vercel.app/`,
             { shippingAddress : values },{ headers : {token: user?.token} } 
             ).then((response)=>{
                 // console.log(response.data);
